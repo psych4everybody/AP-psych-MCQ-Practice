@@ -1,0 +1,1313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AP Psychology Practice Bank</title>
+<style>
+  :root {
+    --navy: #1F3864; --blue: #2E75B6; --light: #DEEAF1; --orange: #C55A11;
+    --ink: #1a1a1a; --muted: #4a5563; --line: #c9d6e3; --bg: #f4f7fb;
+    --good: #1e7b34; --good-bg: #e3f4e7; --bad: #a3242f; --bad-bg: #fbe7e9; --warn-bg: #fff4ea;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; font-family: Arial, Helvetica, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.5; font-size: 17px; }
+  a { color: var(--blue); }
+  button { font: inherit; }
+  .wrap { max-width: 900px; margin: 0 auto; padding: 18px 16px 56px; }
+  header.top { background: var(--navy); color: #fff; }
+  header.top .wrap { padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+  header.top h1 { margin: 0; font-size: 22px; flex: 1 1 auto; }
+  header.top h1 button { all: unset; cursor: pointer; }
+  header.top h1 button:focus-visible { outline: 3px solid #ffb27a; outline-offset: 3px; }
+  .navlinks { display: flex; gap: 8px; flex-wrap: wrap; }
+  .navlinks a, .navlinks button { color: #fff; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.35); border-radius: 6px; padding: 7px 12px; text-decoration: none; font-size: 15px; font-weight: bold; cursor: pointer; }
+  .navlinks a:hover, .navlinks button:hover { background: rgba(255,255,255,.25); }
+  h2 { color: var(--navy); margin: 0 0 6px; font-size: 25px; }
+  h3 { color: var(--navy); margin: 0 0 8px; font-size: 19px; }
+  p.lead { color: var(--muted); margin: 0 0 18px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; margin-bottom: 16px; }
+  .card.accent { border-top: 6px solid var(--blue); }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .tile { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 18px; display: flex; flex-direction: column; gap: 8px; }
+  .tile h3 { margin: 0; }
+  .tile p { margin: 0; color: var(--muted); flex: 1; }
+  .tile .tag { align-self: flex-start; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 11px 18px; border-radius: 7px; border: 2px solid var(--navy); background: var(--navy); color: #fff; font-weight: bold; cursor: pointer; text-decoration: none; font-size: 16px; }
+  .btn:hover:not([disabled]) { background: var(--blue); border-color: var(--blue); }
+  .btn.alt { background: #fff; color: var(--navy); }
+  .btn.alt:hover:not([disabled]) { background: var(--light); color: var(--navy); border-color: var(--navy); }
+  .btn.warn { background: #fff; color: var(--bad); border-color: var(--bad); }
+  .btn.warn:hover:not([disabled]) { background: var(--bad-bg); color: var(--bad); border-color: var(--bad); }
+  .btn.small { padding: 6px 11px; font-size: 14px; }
+  .btn[disabled] { opacity: .45; cursor: not-allowed; }
+  .btn:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, summary:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+  .row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .tag { display: inline-block; background: var(--light); color: var(--navy); border-radius: 12px; padding: 2px 10px; font-size: 13px; font-weight: bold; }
+  .tag.soon { background: #ececec; color: #555; }
+  .tag.orange { background: #fde9d9; color: var(--orange); }
+  .notice { background: var(--warn-bg); border-left: 5px solid var(--orange); padding: 12px 14px; border-radius: 6px; margin-bottom: 16px; }
+  .notice.info { background: var(--light); border-left-color: var(--blue); }
+  .muted { color: var(--muted); }
+  .small { font-size: 14px; }
+
+  /* Builder */
+  .step { display: flex; gap: 12px; align-items: baseline; margin-bottom: 10px; }
+  .step .num { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--orange); color: #fff; font-weight: bold; text-align: center; line-height: 30px; }
+  details.unit { border: 1px solid var(--line); border-radius: 8px; margin-bottom: 8px; background: #fbfdff; }
+  details.unit summary { list-style: none; cursor: pointer; padding: 10px 12px; display: flex; gap: 10px; align-items: center; }
+  details.unit summary::-webkit-details-marker { display: none; }
+  details.unit summary .chev { margin-left: auto; color: var(--muted); font-size: 14px; }
+  details.unit[open] summary .chev::after { content: "Hide topics"; }
+  details.unit:not([open]) summary .chev::after { content: "Show topics"; }
+  .unit-title { font-weight: bold; color: var(--navy); }
+  .topics { padding: 2px 12px 10px 42px; display: grid; gap: 4px; }
+  label.check { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; padding: 4px 0; }
+  label.check input { width: 20px; height: 20px; margin-top: 2px; flex: 0 0 auto; accent-color: var(--navy); }
+  .count { color: var(--muted); font-size: 14px; white-space: nowrap; }
+  .acc { font-size: 12.5px; font-weight: bold; border-radius: 10px; padding: 1px 8px; white-space: nowrap; }
+  .acc.lo { background: var(--bad-bg); color: var(--bad); }
+  .acc.mid { background: var(--warn-bg); color: var(--orange); }
+  .acc.hi { background: var(--good-bg); color: var(--good); }
+  .acc.na { background: #eef1f4; color: #666; }
+  .seg { display: inline-flex; border: 2px solid var(--navy); border-radius: 8px; overflow: hidden; flex-wrap: wrap; }
+  .seg button { border: 0; border-right: 1px solid var(--line); background: #fff; color: var(--navy); padding: 10px 18px; font-weight: bold; cursor: pointer; min-width: 58px; }
+  .seg button:last-child { border-right: 0; }
+  .seg button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+  .choice { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  .choice label { border: 2px solid var(--line); border-radius: 8px; padding: 12px 14px; cursor: pointer; display: flex; gap: 10px; align-items: flex-start; background: #fff; }
+  .choice label:has(input:checked) { border-color: var(--navy); background: #f2f6fb; }
+  .choice input { accent-color: var(--navy); width: 18px; height: 18px; margin-top: 3px; flex: 0 0 auto; }
+  .choice b { color: var(--navy); }
+  .summary-bar { position: sticky; bottom: 0; background: #fff; border-top: 3px solid var(--navy); padding: 12px 16px; margin: 0 -16px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap; box-shadow: 0 -4px 12px rgba(0,0,0,.06); }
+  .summary-bar .txt { flex: 1 1 260px; }
+
+  /* Quiz */
+  .qhead { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px; }
+  .bar { height: 8px; background: #e2e9f0; border-radius: 4px; overflow: hidden; margin-bottom: 16px; }
+  .bar > div { height: 100%; background: var(--blue); transition: width .25s; }
+  .timer { font-weight: bold; font-variant-numeric: tabular-nums; background: var(--light); color: var(--navy); border-radius: 6px; padding: 5px 10px; }
+  .timer.low { background: var(--warn-bg); color: var(--orange); }
+  .timer.crit { background: var(--bad-bg); color: var(--bad); }
+  figure.stim { margin: 0 0 16px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; background: #fcfdff; font-size: 16px; }
+  figure.stim table { border-collapse: collapse; width: 100%; font-size: 15px; }
+  figure.stim th, figure.stim td { border: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  figure.stim th { background: var(--light); color: var(--navy); }
+  figure.stim .cap { font-size: 14px; color: #333; margin-top: 6px; }
+  .tablewrap { overflow-x: auto; }
+  .stem { font-size: 19px; font-weight: bold; margin: 0 0 16px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  button.opt { display: flex; gap: 12px; align-items: flex-start; text-align: left; width: 100%; padding: 13px 14px; background: #fafcfe; border: 2px solid #9db3c9; border-radius: 9px; cursor: pointer; color: var(--ink); font-size: 17px; }
+  button.opt:hover:not([disabled]) { background: var(--light); border-color: var(--blue); }
+  button.opt .ltr { flex: 0 0 auto; width: 30px; height: 30px; border-radius: 50%; background: var(--navy); color: #fff; font-weight: bold; text-align: center; line-height: 30px; font-size: 15px; }
+  button.opt[aria-pressed="true"] { border-color: var(--navy); background: #e8eff7; box-shadow: inset 0 0 0 1px var(--navy); }
+  button.opt[aria-pressed="true"] .ltr { background: var(--orange); }
+  button.opt.correct { background: var(--good-bg); border-color: var(--good); color: #10451d; }
+  button.opt.correct .ltr { background: var(--good); }
+  button.opt.wrong { background: var(--bad-bg); border-color: var(--bad); color: #5e1219; }
+  button.opt.wrong .ltr { background: var(--bad); }
+  button.opt.dim { opacity: .6; }
+  button.opt[disabled] { cursor: default; }
+  .feedback { margin-top: 16px; padding: 13px 15px; border-radius: 8px; border-left: 6px solid var(--bad); background: var(--bad-bg); }
+  .feedback.good { border-left-color: var(--good); background: var(--good-bg); }
+  .feedback .verdict { font-weight: bold; margin: 0 0 4px; }
+  .feedback p { margin: 0; }
+  .qnav { display: flex; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .navgrid { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+  .navgrid button { width: 40px; height: 40px; border-radius: 7px; border: 2px solid var(--line); background: #fff; color: var(--navy); font-weight: bold; cursor: pointer; position: relative; font-size: 14px; }
+  .navgrid button.done { background: var(--light); border-color: #9db3c9; }
+  .navgrid button.cur { border-color: var(--navy); box-shadow: inset 0 0 0 1px var(--navy); }
+  .navgrid button.flag::after { content: ""; position: absolute; top: -4px; right: -4px; width: 12px; height: 12px; border-radius: 50%; background: var(--orange); border: 2px solid #fff; }
+  .flagbtn[aria-pressed="true"] { background: #fde9d9; color: var(--orange); border-color: var(--orange); }
+  .keyhint { font-size: 13.5px; color: var(--muted); margin-top: 10px; }
+
+  /* Results and progress */
+  .bigscore { font-size: 46px; font-weight: bold; color: var(--navy); line-height: 1.1; }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 14px 0; }
+  .stat { background: #f2f6fb; border-radius: 8px; padding: 12px; text-align: center; }
+  .stat b { display: block; font-size: 24px; color: var(--navy); }
+  .stat span { font-size: 13.5px; color: var(--muted); }
+  table.data { width: 100%; border-collapse: collapse; font-size: 15.5px; }
+  table.data th, table.data td { padding: 8px 9px; border-bottom: 1px solid #dde5ee; text-align: left; vertical-align: middle; }
+  table.data th { background: var(--light); color: var(--navy); }
+  .mini { height: 10px; background: #e2e9f0; border-radius: 5px; overflow: hidden; min-width: 80px; }
+  .mini > div { height: 100%; }
+  .review { border: 1px solid var(--line); border-radius: 9px; padding: 14px 16px; margin-bottom: 12px; background: #fff; border-left: 6px solid var(--good); }
+  .review.x { border-left-color: var(--bad); }
+  .review.u { border-left-color: #999; }
+  .review ol { list-style: none; padding: 0; margin: 8px 0; }
+  .review li { padding: 5px 9px; border-radius: 6px; margin: 3px 0; }
+  .review li.k { background: var(--good-bg); font-weight: bold; color: #10451d; }
+  .review li.yx { background: var(--bad-bg); color: #5e1219; }
+  .review .rat { background: #f7f9fb; border-left: 4px solid var(--orange); padding: 8px 11px; font-size: 15.5px; }
+  .filters { display: flex; gap: 8px; flex-wrap: wrap; margin: 10px 0 14px; }
+  .filters button[aria-pressed="true"] { background: var(--navy); color: #fff; }
+
+  /* Modal */
+  .modal-back { position: fixed; inset: 0; background: rgba(15,25,45,.55); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 50; }
+  .modal { background: #fff; border-radius: 12px; max-width: 480px; width: 100%; padding: 22px; box-shadow: 0 12px 40px rgba(0,0,0,.25); }
+  .modal h3 { margin-top: 0; }
+
+  .help h3 { margin-top: 18px; }
+  .help ul { padding-left: 22px; margin: 6px 0; }
+  .help li { margin: 4px 0; }
+  .dont li::marker { content: "\2716  "; color: var(--bad); }
+  .do li::marker { content: "\2714  "; color: var(--good); }
+
+  /* Grade predictor */
+  .pgrid { display: grid; grid-template-columns: 7fr 5fr; gap: 16px; align-items: start; }
+  .pgrid .sticky { position: sticky; top: 12px; }
+  .numrow { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 10px; }
+  .numrow input[type=number], .setup input { width: 84px; text-align: center; font: inherit; font-weight: bold; font-size: 18px; padding: 7px; border: 1px solid #9db3c9; border-radius: 7px; }
+  .setup { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .setup label { font-size: 14.5px; font-weight: bold; color: var(--muted); }
+  .setup input { width: 100%; margin-top: 4px; }
+  input[type=range] { width: 100%; accent-color: var(--navy); height: 28px; }
+  .ticks { display: flex; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  .apcircle { width: 124px; height: 124px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 56px; font-weight: bold; margin: 0 auto 6px; transition: background .25s, color .25s; }
+  .ap5 { background: #dff3e4; color: #1e7b34; } .ap4 { background: #e3f2ee; color: #1f7a63; } .ap3 { background: #fff4d6; color: #9a6a00; }
+  .ap2 { background: #fde9d9; color: var(--orange); } .ap1 { background: var(--bad-bg); color: var(--bad); }
+  .trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 14px 0; }
+  .trio div { background: #f2f6fb; border-radius: 8px; padding: 10px 6px; text-align: center; }
+  .trio b { display: block; font-size: 22px; color: var(--navy); }
+  .trio span { font-size: 12.5px; color: var(--muted); font-weight: bold; text-transform: uppercase; letter-spacing: .03em; }
+  .bandlist div { display: flex; justify-content: space-between; padding: 6px 9px; border-radius: 6px; border: 1px solid transparent; font-size: 15px; }
+  .bandlist div.hl, .daatab div.hl { background: var(--light); border-color: #9db3c9; font-weight: bold; }
+  .daatab { max-height: 240px; overflow-y: auto; border: 1px solid var(--line); border-radius: 7px; font-size: 14.5px; }
+  .daatab div { display: grid; grid-template-columns: 1fr 1fr; padding: 4px 10px; border-bottom: 1px solid #eef2f6; border: 1px solid transparent; }
+  .daatab div span:last-child { text-align: right; }
+  .daatab .head { background: var(--light); color: var(--navy); font-weight: bold; position: sticky; top: 0; }
+  footer { margin-top: 28px; font-size: 13px; color: var(--muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 720px) {
+    body { font-size: 16px; }
+    .grid3 { grid-template-columns: 1fr; }
+    .choice { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .topics { padding-left: 14px; }
+    .stem { font-size: 17.5px; }
+    button.opt { font-size: 16px; }
+    h2 { font-size: 22px; }
+    .bigscore { font-size: 38px; }
+    .hide-sm { display: none; }
+    .pgrid { grid-template-columns: 1fr; }
+    .pgrid .sticky { position: static; }
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <h1><button type="button" data-go="home">AP&reg; Psychology Practice Bank</button></h1>
+    <nav class="navlinks" aria-label="Site">
+      <button type="button" data-go="build">Build a set</button>
+      <button type="button" data-go="progress">My progress</button>
+      <button type="button" data-go="help">How progress is saved</button>
+      <button type="button" data-go="predictor">Grade predictor</button>
+      <a href="index.html" id="indexLink">All units</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap" id="app" tabindex="-1"></main>
+
+<div class="wrap" style="padding-top:0">
+  <footer>
+    All questions on this site are original and were written for classroom revision. They are not College Board materials.
+    AP is a registered trademark of the College Board, which was not involved in the production of this site and does not endorse it.
+  </footer>
+</div>
+<div id="live" class="sr" aria-live="polite"></div>
+
+<script src="practice-bank.js"></script>
+<script>
+/* ===================== Stimulus renderer (tables and charts) ===================== */
+(function (global) {
+  "use strict";
+  var NAVY = "#1F3864", BLUE = "#2E75B6", ORANGE = "#C55A11", PALE = ["#fde9d9", "#DEEAF1", "#ececec", "#e8f3e8"];
+  var SERIES = [NAVY, ORANGE, BLUE, "#6a8f3a"];
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function nice(max) {
+    if (max <= 0) return 1;
+    var p = Math.pow(10, Math.floor(Math.log10(max))), m = max / p;
+    var step = m <= 1 ? 0.2 : m <= 2 ? 0.5 : m <= 5 ? 1 : 2;
+    return Math.ceil(max / (step * p)) * step * p;
+  }
+  function ticks(lo, hi, n) {
+    var span = hi - lo, raw = span / n, p = Math.pow(10, Math.floor(Math.log10(raw))), m = raw / p;
+    var step = (m <= 1 ? 1 : m <= 2 ? 2 : m <= 5 ? 5 : 10) * p, out = [];
+    for (var v = Math.ceil(lo / step) * step; v <= hi + 1e-9; v += step) out.push(Math.round(v * 1e6) / 1e6);
+    return out;
+  }
+  function frame(W, H, L, T, R, B, xl, yl) {
+    return '<line x1="' + L + '" y1="' + T + '" x2="' + L + '" y2="' + (H - B) + '" stroke="#222" stroke-width="2"/>' +
+      '<line x1="' + L + '" y1="' + (H - B) + '" x2="' + (W - R) + '" y2="' + (H - B) + '" stroke="#222" stroke-width="2"/>' +
+      (xl ? '<text x="' + ((L + W - R) / 2) + '" y="' + (H - 6) + '" text-anchor="middle" font-size="14">' + esc(xl) + '</text>' : "") +
+      (yl ? '<text x="16" y="' + ((T + H - B) / 2) + '" text-anchor="middle" font-size="' + (String(yl).length > 40 ? 11 : 14) + '" transform="rotate(-90 16 ' + ((T + H - B) / 2) + ')">' + esc(yl) + '</text>' : "");
+  }
+  function legend(series) {
+    if (series.length < 2) return "";
+    var s = "", x = 70;
+    series.forEach(function (ser, i) {
+      s += '<rect x="' + x + '" y="8" width="14" height="14" fill="' + SERIES[i % 4] + '"/><text x="' + (x + 20) + '" y="20" font-size="13">' + esc(ser.name) + '</text>';
+      x += 34 + String(ser.name).length * 7.5;
+    });
+    return s;
+  }
+  function svg(W, H, s, inner) {
+    return (s.title ? '<div style="font-weight:bold;margin-bottom:4px;">' + esc(s.title) + '</div>' : "") +
+      '<svg viewBox="0 0 ' + W + ' ' + H + '" width="100%" role="img" aria-label="' + esc(s.title || "Chart") + '" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif" fill="#222">' + inner + '</svg>';
+  }
+  function bar(s) {
+    var W = 640, H = 340, L = 70, T = s.series.length > 1 ? 52 : 34, R = 20, B = 62;
+    var vals = []; s.series.forEach(function (ser) { vals = vals.concat(ser.values); });
+    var hi = s.yMax || nice(Math.max.apply(null, vals) * 1.08), lo = Math.min(0, Math.min.apply(null, vals));
+    var y = function (v) { return T + (H - T - B) * (1 - (v - lo) / (hi - lo)); };
+    var n = s.categories.length, k = s.series.length, gw = (W - L - R) / n, bw = Math.min(60, gw * 0.7 / k), g = "";
+    ticks(lo, hi, 5).forEach(function (t) { g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + y(t) + '" y2="' + y(t) + '" stroke="#dde3ea"/><text x="' + (L - 8) + '" y="' + (y(t) + 4) + '" text-anchor="end" font-size="13">' + t + '</text>'; });
+    s.categories.forEach(function (c, i) {
+      var cx = L + gw * i + gw / 2;
+      s.series.forEach(function (ser, j) {
+        var v = ser.values[i], x = cx - (k * bw) / 2 + j * bw;
+        g += '<rect x="' + x + '" y="' + Math.min(y(v), y(0)) + '" width="' + (bw - 3) + '" height="' + Math.abs(y(0) - y(v)) + '" fill="' + SERIES[j % 4] + '"></rect>';
+        g += '<text x="' + (x + (bw - 3) / 2) + '" y="' + (y(v) - 5) + '" text-anchor="middle" font-size="12">' + v + '</text>';
+      });
+      g += '<text x="' + cx + '" y="' + (H - B + 18) + '" text-anchor="middle" font-size="' + (n > 6 ? 11 : 13) + '">' + esc(c) + '</text>';
+    });
+    return svg(W, H, s, g + frame(W, H, L, T, R, B, s.xLabel, s.yLabel) + legend(s.series));
+  }
+  function line(s) {
+    var W = 640, H = 340, L = s.yTickLabels ? 128 : 70, T = s.series.length > 1 ? 52 : 34, R = 20, B = 52;
+    var xs = [], ys = [];
+    s.series.forEach(function (ser) { ser.points.forEach(function (p) { xs.push(p[0]); ys.push(p[1]); }); });
+    (s.hlines || []).forEach(function (h) { ys.push(h.y); });
+    var x0 = Math.min.apply(null, xs), x1 = Math.max.apply(null, xs), y0 = Math.min.apply(null, ys), y1 = Math.max.apply(null, ys);
+    var pad = (y1 - y0) * 0.08 || 1; y0 -= pad; y1 += pad;
+    if (s.yMin !== undefined) y0 = s.yMin; if (s.yMax !== undefined) y1 = s.yMax;
+    var X = function (v) { return L + (W - L - R) * (v - x0) / (x1 - x0 || 1); };
+    var Y = function (v) { return T + (H - T - B) * (1 - (v - y0) / (y1 - y0)); };
+    var g = "", same = (s.bands || []).every(function (x) { return x.label === (s.bands[0] || {}).label; });
+    (s.bands || []).forEach(function (b, i) {
+      g += '<rect x="' + X(b.from) + '" y="' + T + '" width="' + (X(b.to) - X(b.from)) + '" height="' + (H - T - B) + '" fill="' + PALE[(same ? 1 : i) % 4] + '"/>' +
+        '<text x="' + ((X(b.from) + X(b.to)) / 2) + '" y="' + (T - 8) + '" text-anchor="middle" font-size="16" font-weight="bold" fill="' + NAVY + '">' + esc(b.label) + '</text>';
+    });
+    (s.yTicks || ticks(y0, y1, 7)).forEach(function (t) {
+      var lab = s.yTickLabels && s.yTickLabels[t] !== undefined ? s.yTickLabels[t] : t;
+      g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(t) + '" y2="' + Y(t) + '" stroke="#dde3ea"/><text x="' + (L - 8) + '" y="' + (Y(t) + 4) + '" text-anchor="end" font-size="13">' + esc(lab) + '</text>';
+    });
+    (s.xTicks || ticks(x0, x1, 6)).forEach(function (t) { g += '<text x="' + X(t) + '" y="' + (H - B + 18) + '" text-anchor="middle" font-size="13">' + t + '</text>'; });
+    (s.hlines || []).forEach(function (h) {
+      g += '<line x1="' + L + '" x2="' + (W - R) + '" y1="' + Y(h.y) + '" y2="' + Y(h.y) + '" stroke="' + ORANGE + '" stroke-width="2" stroke-dasharray="7 5"/>' +
+        '<text x="' + (W - R - 4) + '" y="' + (Y(h.y) - 6) + '" text-anchor="end" font-size="13" font-weight="bold" fill="' + ORANGE + '">' + esc(h.label || "") + '</text>';
+    });
+    s.series.forEach(function (ser, j) {
+      var d = ser.points.map(function (p, i) { return (i ? "L" : "M") + X(p[0]).toFixed(1) + "," + Y(p[1]).toFixed(1); }).join(" ");
+      g += '<path d="' + d + '" fill="none" stroke="' + SERIES[j % 4] + '" stroke-width="3" stroke-linejoin="round"/>';
+      if (ser.points.length <= 14) ser.points.forEach(function (p) { g += '<circle cx="' + X(p[0]) + '" cy="' + Y(p[1]) + '" r="3.5" fill="' + SERIES[j % 4] + '"/>'; });
+    });
+    return svg(W, H, s, g + frame(W, H, L, T, R, B, s.xLabel, s.yLabel) + legend(s.series));
+  }
+  function table(s) {
+    var h = '<div class="tablewrap"><table><thead><tr>' + s.headers.map(function (c) { return "<th>" + esc(c) + "</th>"; }).join("") + "</tr></thead><tbody>";
+    s.rows.forEach(function (r) { h += "<tr>" + r.map(function (c) { return "<td>" + esc(c) + "</td>"; }).join("") + "</tr>"; });
+    return h + "</tbody></table></div>" + (s.caption ? '<div class="cap">' + esc(s.caption) + "</div>" : "");
+  }
+  function passage(s) { return String(s.text).split(/\n+/).map(function (p) { return '<p style="margin:4px 0">' + esc(p) + "</p>"; }).join(""); }
+  global.renderStimulus = function (s) {
+    try {
+      if (!s) return "";
+      if (s.type === "table") return table(s);
+      if (s.type === "bar") return bar(s);
+      if (s.type === "line") return line(s);
+      return passage(s);
+    } catch (e) { return '<p style="color:#a3242f">This chart could not be drawn.</p>'; }
+  };
+})(window);
+
+/* ===================== Practice app ===================== */
+(function () {
+  "use strict";
+
+  /* ---------- Configuration ---------- */
+  var CONFIG = {
+    secondsPerItem: 72,            // AP pace: 75 questions in 90 minutes
+    storeKey: "apPsychPracticeBank_v1",
+    runKey: "apPsychPracticeBank_run_v1",
+    sizes: [10, 20, 30, 40, 50],
+    minAttemptsForRating: 5,
+    diagnosticPerUnit: 5,
+    /* Paste your Google Form pre-filled link between the quotes to switch on the "Send my results" button.
+       The link must use these placeholder answers: NAME, CLASS, TYPE, SCORE, TOPICS, NEXT, WHEN.
+       Leave it empty ("") to hide the button. */
+    resultsFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSd2QYnSIrLFzQH2LFlYS3WglS2EPdbN1DLgNp_cAhb_tnjf_A/viewform?usp=pp_url&entry.1099316124=NAME&entry.60270547=CLASS&entry.1368870186=TYPE&entry.954066325=SCORE&entry.1858005444=TOPICS&entry.1534664006=NEXT&entry.798905023=WHEN",
+    /* Link for the "All units" button in the top bar. Leave empty ("") to hide the button until your index page is online. */
+    indexUrl: ""
+  };
+  var UNITS = {
+    "0": "Scientific Foundations of Psychology", "1": "Biological Bases of Behavior", "2": "Cognition",
+    "3": "Development and Learning", "4": "Social Psychology and Personality", "5": "Mental and Physical Health"
+  };
+  var TOPICS = {
+    "0.1": "Introducing Psychology and Its Perspectives", "0.2": "Research Design and Methods", "0.3": "Variables, Sampling and Controls",
+    "0.4": "Ethics in Research", "0.5": "Descriptive Statistics", "0.6": "Inferential Statistics and Interpreting Results",
+    "1.1": "Interaction of Heredity and Environment", "1.2": "Overview of the Nervous System", "1.3": "The Neuron and Neural Firing",
+    "1.4": "The Brain", "1.5": "Sleep", "1.6": "Sensation",
+    "2.1": "Perception", "2.2": "Thinking, Problem-Solving, Judgments, and Decision-Making", "2.3": "Introduction to Memory",
+    "2.4": "Encoding Memories", "2.5": "Storing Memories", "2.6": "Retrieving Memories", "2.7": "Forgetting and Other Memory Challenges",
+    "2.8": "Intelligence and Achievement",
+    "3.1": "Themes and Methods in Developmental Psychology", "3.2": "Physical Development Across the Lifespan",
+    "3.4": "Cognitive Development Across the Lifespan", "3.5": "Communication and Language Development",
+    "3.6": "Social-Emotional Development Across the Lifespan", "3.7": "Classical Conditioning", "3.8": "Operant Conditioning",
+    "3.9": "Social, Cognitive, and Neurological Factors in Learning",
+    "4.1": "Attribution Theory and Person Perception", "4.2": "Attitude Formation and Attitude Change", "4.3": "Psychology of Social Situations",
+    "4.4": "Psychodynamic and Humanistic Theories of Personality", "4.5": "Social-Cognitive and Trait Theories of Personality",
+    "4.6": "Motivation", "4.7": "Emotion",
+    "5.1": "Introduction to Health Psychology", "5.2": "Positive Psychology", "5.3": "Explaining and Classifying Psychological Disorders",
+    "5.4": "Selection of Categories of Psychological Disorders", "5.5": "Treatment of Psychological Disorders"
+  };
+  var LETTERS = ["A", "B", "C", "D"];
+  var DATA_SKILLS = { "Data Interpretation": 1, "Research Methods and Design": 1 };
+
+  /* ---------- Bank ---------- */
+  var BANK = window.AP_BANK || [];
+  var BY_ID = {};
+  var BY_SECTION = {};
+  BANK.forEach(function (q) {
+    BY_ID[q.id] = q;
+    (BY_SECTION[q.section] = BY_SECTION[q.section] || []).push(q);
+  });
+  var SECTIONS = Object.keys(BY_SECTION).sort(function (a, b) {
+    var x = a.split("."), y = b.split(".");
+    return (x[0] - y[0]) || (x[1] - y[1]);
+  });
+  function unitOf(sec) { return sec.split(".")[0]; }
+  function topicName(sec) { return TOPICS[sec] || ("Topic " + sec); }
+
+  /* ---------- Utilities ---------- */
+  function esc(s) { return String(s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); }
+  function shuffle(a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function pct(c, n) { return n ? Math.round(c / n * 100) : 0; }
+  function fmtTime(sec) { sec = Math.max(0, Math.round(sec)); var m = Math.floor(sec / 60), s = sec % 60; return m + ":" + (s < 10 ? "0" : "") + s; }
+  function fmtDate(t) { try { return new Date(t).toLocaleDateString(undefined, { day: "numeric", month: "short", year: "numeric" }); } catch (e) { return ""; } }
+  function announce(msg) { var el = document.getElementById("live"); el.textContent = ""; setTimeout(function () { el.textContent = msg; }, 30); }
+  function accClass(a) { return a == null ? "na" : a < 60 ? "lo" : a < 80 ? "mid" : "hi"; }
+
+  /* ---------- Storage ---------- */
+  var storageOK = true;
+  try { var k = "__t" + Date.now(); localStorage.setItem(k, "1"); localStorage.removeItem(k); } catch (e) { storageOK = false; }
+  function blankStore() { return { v: 1, created: Date.now(), items: {}, history: [], settings: null }; }
+  function loadStore() {
+    if (!storageOK) return blankStore();
+    try {
+      var s = JSON.parse(localStorage.getItem(CONFIG.storeKey) || "null");
+      if (s && s.v === 1 && s.items) { s.history = s.history || []; return s; }
+    } catch (e) { }
+    return blankStore();
+  }
+  var store = loadStore();
+  function saveStore() {
+    if (!storageOK) return;
+    try { localStorage.setItem(CONFIG.storeKey, JSON.stringify(store)); } catch (e) { storageOK = false; }
+  }
+  function saveRun() {
+    if (!storageOK) return;
+    try { if (run && !run.finished) localStorage.setItem(CONFIG.runKey, JSON.stringify(run)); else localStorage.removeItem(CONFIG.runKey); } catch (e) { }
+  }
+  function loadRun() {
+    if (!storageOK) return null;
+    try {
+      var r = JSON.parse(localStorage.getItem(CONFIG.runKey) || "null");
+      if (r && r.items && r.items.every(function (it) { return BY_ID[it.id]; })) return r;
+    } catch (e) { }
+    return null;
+  }
+  if (storageOK && navigator.storage && navigator.storage.persist) { try { navigator.storage.persist(); } catch (e) { } }
+
+  function recordAnswer(id, correct) {
+    var r = store.items[id] || (store.items[id] = { a: 0, c: 0 });
+    r.a += 1; if (correct) r.c += 1;
+    r.t = Date.now(); r.lr = correct ? 1 : 0;
+  }
+  function recordSeen(id) {
+    var r = store.items[id] || (store.items[id] = { a: 0, c: 0 });
+    r.t = Date.now(); r.s = 1;
+  }
+  function sectionStats(sec) {
+    var list = BY_SECTION[sec] || [], seen = 0, a = 0, c = 0, wrong = 0;
+    list.forEach(function (q) {
+      var r = store.items[q.id]; if (!r) return;
+      if (r.a || r.s) seen++;
+      a += r.a; c += r.c; if (r.lr === 0) wrong++;
+    });
+    return { total: list.length, seen: seen, attempts: a, correct: c, acc: a ? pct(c, a) : null, wrong: wrong };
+  }
+  function rated(st) { return st.attempts >= CONFIG.minAttemptsForRating ? st.acc : null; }
+  function weakestSections(n) {
+    return SECTIONS.map(function (s) { return { s: s, st: sectionStats(s) }; })
+      .filter(function (x) { return x.st.attempts >= CONFIG.minAttemptsForRating && x.st.acc < 80; })
+      .sort(function (x, y) { return x.st.acc - y.st.acc; }).slice(0, n).map(function (x) { return x.s; });
+  }
+
+  /* ---------- Builder settings ---------- */
+  var defaults = { sections: [], size: 20, mode: "practice", timer: true, source: "fresh", type: "all" };
+  var settings = Object.assign({}, defaults, store.settings || {});
+  settings.sections = (settings.sections || []).filter(function (s) { return BY_SECTION[s]; });
+
+  function candidatePool(st) {
+    var secSet = {}; st.sections.forEach(function (s) { secSet[s] = 1; });
+    return BANK.filter(function (q) {
+      if (!secSet[q.section]) return false;
+      if (st.type === "data" && !DATA_SKILLS[q.skill]) return false;
+      if (st.type === "concept" && DATA_SKILLS[q.skill]) return false;
+      if (st.source === "wrong") { var r = store.items[q.id]; return r && r.lr === 0; }
+      return true;
+    });
+  }
+  function freshCount(pool) { return pool.filter(function (q) { var r = store.items[q.id]; return !r || (!r.a && !r.s); }).length; }
+
+  /* Choose questions: unseen first, spread across the chosen topics in proportion to their size,
+     never two questions that share the same passage or chart. */
+  function prepareSet(st) {
+    var pool = candidatePool(st);
+    var out = [], usedSets = {};
+    function take(list) {
+      var groups = {};
+      list.forEach(function (q) { (groups[q.section] = groups[q.section] || []).push(q); });
+      while (out.length < st.size) {
+        var keys = Object.keys(groups).filter(function (k) { return groups[k].length; });
+        if (!keys.length) break;
+        var total = keys.reduce(function (s, k) { return s + groups[k].length; }, 0), r = Math.random() * total, key = keys[0];
+        for (var i = 0; i < keys.length; i++) { r -= groups[keys[i]].length; if (r < 0) { key = keys[i]; break; } }
+        var q = groups[key].shift();
+        if (q.set && usedSets[q.set]) continue;
+        if (q.set) usedSets[q.set] = 1;
+        out.push(q);
+      }
+    }
+    if (st.source === "fresh") {
+      var unseen = [], seen = [];
+      pool.forEach(function (q) { var r = store.items[q.id]; (r && (r.a || r.s) ? seen : unseen).push(q); });
+      take(shuffle(unseen));
+      if (out.length < st.size) {
+        seen.sort(function (x, y) { return (store.items[x.id].t || 0) - (store.items[y.id].t || 0); });
+        take(seen);
+      }
+    } else {
+      take(shuffle(pool));
+    }
+    return shuffle(out);
+  }
+
+  function newRun(questions, opts) {
+    return {
+      kind: opts.kind || "set", mode: opts.mode, timer: opts.mode === "test" && !!opts.timer,
+      settings: opts.settings || null, title: opts.title || "Practice set",
+      items: questions.map(function (q) {
+        var order = [0, 1, 2, 3];
+        if (!q.fixed_order) order = shuffle(order);
+        return { id: q.id, order: order, chosen: null, flagged: false };
+      }),
+      pos: 0, startedAt: Date.now(), limitSec: questions.length * CONFIG.secondsPerItem,
+      deadline: opts.mode === "test" && opts.timer ? Date.now() + questions.length * CONFIG.secondsPerItem * 1000 : null,
+      finished: false, endedEarly: false, finishedAt: null, revealed: {}
+    };
+  }
+
+  /* ---------- App state and routing ---------- */
+  var app = document.getElementById("app");
+  var view = "home";
+  var run = loadRun();
+  var timerHandle = null;
+  var reviewFilter = "all";
+
+  function go(v, opts) {
+    view = v;
+    stopTimer();
+    if (v === "home") renderHome();
+    else if (v === "build") renderBuilder(opts);
+    else if (v === "quiz") renderQuiz();
+    else if (v === "results") renderResults();
+    else if (v === "progress") renderProgress();
+    else if (v === "help") renderHelp();
+    else if (v === "diag") renderDiagIntro();
+    else if (v === "predictor") renderPredictor(opts);
+    window.scrollTo(0, 0);
+    if (!opts || !opts.keepFocus) app.focus({ preventScroll: true });
+  }
+  document.addEventListener("click", function (e) {
+    var t = e.target.closest("[data-go]");
+    if (!t) return;
+    var dest = t.getAttribute("data-go");
+    if (view === "quiz" && run && !run.finished && dest !== "quiz") {
+      confirmBox("Leave this set?", "Your answers so far are saved on this device. You can resume the set from the home page.", "Leave set", function () { go(dest); });
+      return;
+    }
+    go(dest);
+  });
+
+  /* ---------- Modal ---------- */
+  function confirmBox(title, body, okLabel, onOk, cancelLabel) {
+    var back = document.createElement("div");
+    back.className = "modal-back";
+    back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><h3 id="mt">' + esc(title) + '</h3><p>' + body + '</p>' +
+      '<div class="row" style="justify-content:flex-end"><button class="btn alt" data-m="no">' + esc(cancelLabel || "Cancel") + '</button>' +
+      (okLabel ? '<button class="btn" data-m="ok">' + esc(okLabel) + '</button>' : "") + '</div></div>';
+    document.body.appendChild(back);
+    var prev = document.activeElement;
+    function close() { back.remove(); document.removeEventListener("keydown", onKey, true); if (prev && prev.focus) prev.focus(); }
+    function onKey(e) { if (e.key === "Escape") { e.stopPropagation(); close(); } }
+    document.addEventListener("keydown", onKey, true);
+    back.addEventListener("click", function (e) {
+      if (e.target === back || e.target.getAttribute("data-m") === "no") close();
+      else if (e.target.getAttribute("data-m") === "ok") { close(); onOk(); }
+    });
+    (back.querySelector('[data-m="ok"]') || back.querySelector('[data-m="no"]')).focus();
+  }
+
+  /* ---------- Home ---------- */
+  function renderHome() {
+    var seen = Object.keys(store.items).filter(function (id) { var r = store.items[id]; return BY_ID[id] && (r.a || r.s); }).length;
+    var html = "";
+    if (!storageOK) html += '<div class="notice"><b>Your progress cannot be saved in this browser mode.</b> You may be in a private or incognito window. You can still practice, but nothing will be remembered after you close this tab.</div>';
+    if (run && !run.finished) {
+      var answered = run.items.filter(function (it) { return it.chosen !== null; }).length;
+      html += '<div class="notice info row"><div style="flex:1 1 260px"><b>You have an unfinished ' + (run.mode === "test" ? "test" : "practice") + ' set.</b> ' + answered + ' of ' + run.items.length + ' questions answered.' +
+        (run.deadline ? ' The timer kept running while you were away.' : '') + '</div><button class="btn small" id="resume">Resume set</button><button class="btn small warn" id="discard">Discard it</button></div>';
+    }
+    html += '<h2>Prepare for the May exam, one set at a time</h2>' +
+      '<p class="lead">' + BANK.length.toLocaleString() + ' original questions across Units 0 to 5. You choose the ingredients, and the site prepares a fresh set for you every time.</p>' +
+      '<div class="grid3">' +
+      '<div class="tile"><span class="tag orange">For the May exam</span><h3>Know where to start</h3><p>A 30-question diagnostic across all six units (about 36 minutes) that shows which units and topics to revise first.' +
+      (store.lastDiag ? '<br><br><b>Last taken ' + fmtDate(store.lastDiag.t) + ':</b> start with ' + esc(store.lastDiag.rec.map(function (u) { return "Unit " + u; }).join(" and ") || "mixed review") + '.' : '') + '</p>' +
+      '<button class="btn alt" data-go="diag">' + (store.lastDiag ? "Retake the diagnostic" : "Take the diagnostic") + '</button></div>' +
+      '<div class="tile"><span class="tag">For summative and unit revision</span><h3>Build my practice set</h3><p>Pick the units or topics, the number of questions, and practice or test mode. Every set is prepared fresh.</p><button class="btn" data-go="build">Choose my ingredients</button></div>' +
+      '<div class="tile"><span class="tag orange">' + seen + ' of ' + BANK.length + ' questions seen</span><h3>My progress</h3><p>Your accuracy by unit and topic, your weakest topics, and your recent sets.</p><button class="btn alt" data-go="progress">See my progress</button></div>' +
+      '</div>' +
+      '<div class="card" style="margin-top:16px"><h3>Your progress stays on this device</h3><p style="margin:0">Everything is saved automatically in this browser. Clearing your browsing data, using a private window, or switching devices without a backup will lose it. <button class="btn small alt" data-go="help">Read how to keep your progress</button></p></div>' +
+      '<div class="card"><h3>AP Grade Predictor</h3><p style="margin:0 0 10px">Enter your MCQ and FRQ marks from a summative to estimate your AP score, DAA number and letter grade.</p><button class="btn alt" data-go="predictor">Open the grade predictor</button></div>';
+    app.innerHTML = html;
+    var r = document.getElementById("resume");
+    if (r) {
+      r.addEventListener("click", function () { if (run.deadline && Date.now() >= run.deadline) { finishRun(false); go("results"); } else go("quiz"); });
+      document.getElementById("discard").addEventListener("click", function () {
+        confirmBox("Discard this set?", "The questions you already answered in it stay in your progress. The rest of the set will be thrown away.", "Discard set", function () { run = null; saveRun(); go("home"); });
+      });
+    }
+  }
+
+  /* ---------- Builder ---------- */
+  function renderBuilder(opts) {
+    if (opts && opts.sections) settings.sections = opts.sections.slice();
+    var sel = {}; settings.sections.forEach(function (s) { sel[s] = 1; });
+    var units = {}; SECTIONS.forEach(function (s) { (units[unitOf(s)] = units[unitOf(s)] || []).push(s); });
+    var weak = weakestSections(3);
+
+    var html = '<h2>Choose your ingredients</h2><p class="lead">Tell the site what to put in your set. It will mix the questions, shuffle the answer choices, and serve you questions you have not seen yet whenever it can.</p>';
+
+    html += '<div class="card accent"><div class="step"><span class="num">1</span><h3>What should the set cover?</h3></div>' +
+      '<div class="row" style="margin-bottom:10px"><button class="btn small alt" id="selAll">Select everything</button><button class="btn small alt" id="selNone">Clear</button>' +
+      (weak.length ? '<button class="btn small alt" id="selWeak">My weakest topics</button>' : '') + '</div>';
+    Object.keys(units).sort().forEach(function (u) {
+      var secs = units[u], n = secs.reduce(function (s, x) { return s + BY_SECTION[x].length; }, 0);
+      var anyOpen = secs.some(function (s) { return sel[s]; });
+      html += '<details class="unit"' + (anyOpen ? " open" : "") + '><summary><input type="checkbox" class="unitbox" data-unit="' + u + '" aria-label="All of Unit ' + u + '" style="width:20px;height:20px;accent-color:#1F3864">' +
+        '<span><span class="unit-title">Unit ' + u + ': ' + esc(UNITS[u]) + '</span> <span class="count">' + n + ' questions</span></span><span class="chev hide-sm"></span></summary><div class="topics">';
+      secs.forEach(function (s) {
+        var st = sectionStats(s), a = rated(st);
+        html += '<label class="check"><input type="checkbox" class="topicbox" data-sec="' + s + '"' + (sel[s] ? " checked" : "") + '>' +
+          '<span><b>' + s + '</b> ' + esc(topicName(s)) + ' <span class="count">(' + st.total + ')</span> ' +
+          (st.attempts ? '<span class="acc ' + accClass(a) + '">' + (a == null ? "Started" : a + "% correct") + '</span>' : '') + '</span></label>';
+      });
+      html += '</div></details>';
+    });
+    html += '</div>';
+
+    html += '<div class="card accent"><div class="step"><span class="num">2</span><h3>How many questions?</h3></div><div class="seg" role="group" aria-label="Set size">' +
+      CONFIG.sizes.map(function (n) { return '<button data-size="' + n + '" aria-pressed="' + (settings.size === n) + '">' + n + '</button>'; }).join("") +
+      '</div><p class="small muted" style="margin:10px 0 0">The real exam has 75 multiple-choice questions in 90 minutes.</p></div>';
+
+    html += '<div class="card accent"><div class="step"><span class="num">3</span><h3>Practice or test?</h3></div><div class="choice">' +
+      '<label><input type="radio" name="mode" value="practice"' + (settings.mode === "practice" ? " checked" : "") + '><span><b>Practice mode</b><br><span class="muted small">See if you were right, with an explanation, after every question. Best while you are still learning a topic.</span></span></label>' +
+      '<label><input type="radio" name="mode" value="test"' + (settings.mode === "test" ? " checked" : "") + '><span><b>Test mode</b><br><span class="muted small">Exam conditions. Move freely, flag questions, change answers, and see your results only when you submit.</span></span></label>' +
+      '</div><div id="timerBox" style="margin-top:12px' + (settings.mode === "test" ? "" : ";display:none") + '"><label class="check"><input type="checkbox" id="timer"' + (settings.timer ? " checked" : "") + '><span><b>Use the exam timer</b> <span class="tag orange">Highly recommended</span><br><span class="muted small">72 seconds per question, the same pace as the AP exam. <span id="timerLen"></span></span></span></label></div></div>';
+
+    html += '<div class="card accent"><div class="step"><span class="num">4</span><h3>Which questions?</h3></div><div class="choice">' +
+      '<label><input type="radio" name="source" value="fresh"' + (settings.source === "fresh" ? " checked" : "") + '><span><b>Fresh questions first</b> <span class="tag">Recommended</span><br><span class="muted small">Questions you have not seen yet, so each set is different from the last.</span></span></label>' +
+      '<label><input type="radio" name="source" value="wrong"' + (settings.source === "wrong" ? " checked" : "") + '><span><b>Questions I got wrong</b><br><span class="muted small">Only questions you missed the last time you answered them.</span></span></label>' +
+      '</div><div style="margin-top:12px"><label for="qtype" class="small"><b>Question type</b></label><br><select id="qtype" style="font:inherit;padding:8px;border-radius:6px;border:1px solid #9db3c9;margin-top:4px">' +
+      '<option value="all"' + (settings.type === "all" ? " selected" : "") + '>All question types</option>' +
+      '<option value="concept"' + (settings.type === "concept" ? " selected" : "") + '>Concept and application questions</option>' +
+      '<option value="data"' + (settings.type === "data" ? " selected" : "") + '>Research methods and data questions</option></select></div></div>';
+
+    html += '<div class="summary-bar"><div class="txt" id="sumTxt"></div><button class="btn" id="startBtn">Prepare my set</button></div>';
+    app.innerHTML = html;
+
+    function syncUnitBoxes() {
+      app.querySelectorAll(".unitbox").forEach(function (ub) {
+        var boxes = app.querySelectorAll('.topicbox[data-sec^="' + ub.getAttribute("data-unit") + '."]');
+        var on = Array.prototype.filter.call(boxes, function (b) { return b.checked; }).length;
+        ub.checked = on === boxes.length; ub.indeterminate = on > 0 && on < boxes.length;
+      });
+    }
+    function readSel() { settings.sections = Array.prototype.filter.call(app.querySelectorAll(".topicbox"), function (b) { return b.checked; }).map(function (b) { return b.getAttribute("data-sec"); }); }
+    function update() {
+      readSel(); syncUnitBoxes();
+      var pool = candidatePool(settings), fresh = freshCount(pool), n = Math.min(settings.size, pool.length);
+      var t = document.getElementById("sumTxt"), btn = document.getElementById("startBtn");
+      document.getElementById("timerBox").style.display = settings.mode === "test" ? "" : "none";
+      document.getElementById("timerLen").textContent = "For " + settings.size + " questions that is " + Math.round(settings.size * CONFIG.secondsPerItem / 60) + " minutes.";
+      if (!settings.sections.length) { t.innerHTML = "<b>Pick at least one topic</b> in step 1."; btn.disabled = true; }
+      else if (!pool.length) { t.innerHTML = settings.source === "wrong" ? "<b>No missed questions here yet.</b> Choose fresh questions instead, or pick other topics." : "<b>No questions match these choices.</b>"; btn.disabled = true; }
+      else {
+        btn.disabled = false;
+        var unitsChosen = {}; settings.sections.forEach(function (s) { unitsChosen[unitOf(s)] = 1; });
+        t.innerHTML = "<b>" + n + " questions</b> from " + settings.sections.length + " topic" + (settings.sections.length > 1 ? "s" : "") + " in " + Object.keys(unitsChosen).length + " unit" + (Object.keys(unitsChosen).length > 1 ? "s" : "") + ", " + (settings.mode === "test" ? "test mode" + (settings.timer ? " with timer" : "") : "practice mode") + "." +
+          '<br><span class="small muted">' + (settings.source === "wrong" ? pool.length + " missed questions available." : fresh + " of " + pool.length + " matching questions are new to you.") +
+          (n < settings.size ? " Only " + pool.length + " questions match, so your set will be shorter." : "") + "</span>";
+      }
+      store.settings = settings; saveStore();
+    }
+    app.querySelectorAll(".topicbox").forEach(function (b) { b.addEventListener("change", update); });
+    app.querySelectorAll(".unitbox").forEach(function (ub) {
+      ub.addEventListener("click", function (e) { e.stopPropagation(); });
+      ub.addEventListener("change", function () {
+        app.querySelectorAll('.topicbox[data-sec^="' + ub.getAttribute("data-unit") + '."]').forEach(function (b) { b.checked = ub.checked; });
+        if (ub.checked) ub.closest("details").open = true;
+        update();
+      });
+    });
+    document.getElementById("selAll").addEventListener("click", function () { app.querySelectorAll(".topicbox").forEach(function (b) { b.checked = true; }); update(); });
+    document.getElementById("selNone").addEventListener("click", function () { app.querySelectorAll(".topicbox").forEach(function (b) { b.checked = false; }); update(); });
+    var sw = document.getElementById("selWeak");
+    if (sw) sw.addEventListener("click", function () {
+      var w = {}; weak.forEach(function (s) { w[s] = 1; });
+      app.querySelectorAll(".topicbox").forEach(function (b) { b.checked = !!w[b.getAttribute("data-sec")]; if (b.checked) b.closest("details").open = true; });
+      update();
+    });
+    app.querySelectorAll("[data-size]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        settings.size = +b.getAttribute("data-size");
+        app.querySelectorAll("[data-size]").forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
+        update();
+      });
+    });
+    app.querySelectorAll('input[name="mode"]').forEach(function (r) { r.addEventListener("change", function () { settings.mode = r.value; update(); }); });
+    app.querySelectorAll('input[name="source"]').forEach(function (r) { r.addEventListener("change", function () { settings.source = r.value; update(); }); });
+    document.getElementById("timer").addEventListener("change", function (e) { settings.timer = e.target.checked; update(); });
+    document.getElementById("qtype").addEventListener("change", function (e) { settings.type = e.target.value; update(); });
+    document.getElementById("startBtn").addEventListener("click", function () { startFromSettings(settings); });
+    update();
+  }
+
+  function startFromSettings(st) {
+    var qs = prepareSet(st);
+    if (!qs.length) return;
+    var copy = JSON.parse(JSON.stringify(st));
+    function begin() {
+      run = newRun(qs, { mode: st.mode, timer: st.timer, settings: copy, title: (st.mode === "test" ? "Test" : "Practice") + " set" });
+      saveRun(); go("quiz");
+    }
+    if (run && !run.finished) confirmBox("Replace your unfinished set?", "You have an unfinished set. Starting a new one will discard it. Answers you already gave stay in your progress.", "Start new set", begin);
+    else begin();
+  }
+
+  /* ---------- Diagnostic ---------- */
+  /* Five questions per unit, each from a different topic where possible, mostly standard difficulty,
+     new to the student where possible. */
+  function prepareDiagnostic() {
+    var out = [], usedSets = {};
+    Object.keys(UNITS).forEach(function (u) {
+      var secs = shuffle(SECTIONS.filter(function (s) { return unitOf(s) === u; }));
+      var picks = [];
+      for (var i = 0; picks.length < CONFIG.diagnosticPerUnit && i < secs.length * 3; i++) picks.push(secs[i % secs.length]);
+      picks.forEach(function (s) {
+        var cands = BY_SECTION[s].filter(function (q) { return !(q.set && usedSets[q.set]) && out.indexOf(q) < 0; });
+        function score(q) {
+          var r = store.items[q.id], fresh = !r || (!r.a && !r.s);
+          return (fresh ? 0 : 10) + (q.difficulty === 2 ? 0 : q.difficulty === 1 ? 2 : 3) + Math.random();
+        }
+        cands.sort(function (a, b) { return score(a) - score(b); });
+        var q = cands[0];
+        if (q) { out.push(q); if (q.set) usedSets[q.set] = 1; }
+      });
+    });
+    return shuffle(out);
+  }
+
+  function renderDiagIntro() {
+    var n = Object.keys(UNITS).length * CONFIG.diagnosticPerUnit, mins = Math.round(n * CONFIG.secondsPerItem / 60);
+    app.innerHTML = '<h2>Know where to start for May</h2><p class="lead">A quick check across the whole course. It shows which units, and which topics inside them, to put first in your revision.</p>' +
+      '<div class="card accent"><h3>How it works</h3><ul style="margin:6px 0 12px;padding-left:22px">' +
+      '<li><b>' + n + ' questions</b>: ' + CONFIG.diagnosticPerUnit + ' from each of Units 0 to 5, each from a different topic.</li>' +
+      '<li>It runs like the exam: no feedback until you submit, and you can flag questions and change answers.</li>' +
+      '<li>Answer on your own, without notes. A guess you got right hides a gap, so if you do not know, choose your best answer and move on.</li>' +
+      '<li>At the end you get a ranking of the six units and a short list of topics to start with, with one-click practice sets for each.</li>' +
+      '<li>You can retake it later (for example, after a unit test or in the spring). You will get different questions each time.</li></ul>' +
+      '<label class="check"><input type="checkbox" id="dtimer" checked><span><b>Use the exam timer</b> <span class="tag orange">Highly recommended</span><br><span class="muted small">' + mins + ' minutes for ' + n + ' questions, the same pace as the AP exam.</span></span></label>' +
+      '<div class="row" style="margin-top:14px"><button class="btn" id="dstart">Start the diagnostic</button><button class="btn alt" data-go="home">Not now</button></div></div>';
+    document.getElementById("dstart").addEventListener("click", function () {
+      var timer = document.getElementById("dtimer").checked;
+      function begin() {
+        run = newRun(prepareDiagnostic(), { mode: "test", timer: timer, kind: "diagnostic", title: "Diagnostic" });
+        saveRun(); go("quiz");
+      }
+      if (run && !run.finished) confirmBox("Replace your unfinished set?", "You have an unfinished set. Starting the diagnostic will discard it. Answers you already gave stay in your progress.", "Start diagnostic", begin);
+      else begin();
+    });
+  }
+
+  function diagnosticSummary(r) {
+    var units = {}, missed = {};
+    Object.keys(UNITS).forEach(function (u) { units[u] = { c: 0, n: 0 }; });
+    r.items.forEach(function (it) {
+      var q = BY_ID[it.id], u = unitOf(q.section), ok = it.chosen === q.answer;
+      units[u].n++; if (ok) units[u].c++;
+      if (!ok) (missed[u] = missed[u] || []).push(q.section);
+    });
+    var order = Object.keys(units).sort(function (a, b) { return (units[a].c / (units[a].n || 1)) - (units[b].c / (units[b].n || 1)) || a - b; });
+    var rec = order.filter(function (u) { return units[u].n && units[u].c / units[u].n <= 0.6; }).slice(0, 3);
+    if (!rec.length) rec = order.slice(0, 1);
+    return { units: units, order: order, rec: rec, missed: missed };
+  }
+
+  /* ---------- Quiz ---------- */
+  function stopTimer() { if (timerHandle) { clearInterval(timerHandle); timerHandle = null; } }
+  function tickTimer() {
+    var el = document.getElementById("timer"); if (!el || !run || !run.deadline) return;
+    var left = (run.deadline - Date.now()) / 1000;
+    if (left <= 0) {
+      stopTimer(); finishRun(false); go("results");
+      confirmBox("Time is up", "Your set was submitted automatically. Unanswered questions count as incorrect, just like on the exam.", null, function () { }, "See my results");
+      return;
+    }
+    if (!run.timerHidden) el.textContent = fmtTime(left) + " left";
+    el.className = "timer" + (left <= 60 ? " crit" : left <= 300 ? " low" : "");
+    if (Math.floor(left) === 300 || Math.floor(left) === 60) announce(Math.floor(left / 60) + " minute" + (left >= 120 ? "s" : "") + " left");
+  }
+
+  function renderQuiz() {
+    if (!run) { go("home"); return; }
+    var it = run.items[run.pos], q = BY_ID[it.id], test = run.mode === "test";
+    var answered = run.items.filter(function (x) { return x.chosen !== null; }).length;
+    var revealed = !test && it.chosen !== null;
+    var html = '<div class="qhead"><span><b>Question ' + (run.pos + 1) + ' of ' + run.items.length + '</b>' + (revealed ? ' <span class="tag">' + esc(q.section + " " + topicName(q.section)) + '</span>' : '') + '</span><span class="row">' +
+      (run.deadline ? '<span class="timer" id="timer"></span><button class="btn small alt" id="hideT">' + (run.timerHidden ? "Show timer" : "Hide timer") + '</button>' : '') +
+      '<button class="btn small alt" id="endBtn">' + (test ? "Submit set" : "End set") + '</button></span></div>' +
+      '<div class="bar"><div style="width:' + (test ? answered / run.items.length : (run.pos + (revealed ? 1 : 0)) / run.items.length) * 100 + '%"></div></div>' +
+      '<div class="card">' + (q.stimulus ? '<figure class="stim">' + renderStimulus(q.stimulus) + '</figure>' : '') +
+      '<p class="stem" id="stem">' + esc(q.stem) + '</p><div class="options" role="group" aria-labelledby="stem">';
+    it.order.forEach(function (orig, i) {
+      var cls = "opt", pressed = it.chosen === orig;
+      if (revealed) cls += orig === q.answer ? " correct" : pressed ? " wrong" : " dim";
+      html += '<button class="' + cls + '" data-orig="' + orig + '"' + (test ? ' aria-pressed="' + pressed + '"' : '') + (revealed ? " disabled" : "") + '><span class="ltr">' + LETTERS[i] + '</span><span>' + esc(q.options[orig]) + '</span></button>';
+    });
+    html += '</div><div id="fb">';
+    if (revealed) html += feedbackHtml(q, it);
+    html += '</div><div class="qnav">';
+    if (test) {
+      html += '<button class="btn alt" id="prev"' + (run.pos === 0 ? " disabled" : "") + '>Previous</button>' +
+        '<button class="btn alt flagbtn" id="flag" aria-pressed="' + it.flagged + '">' + (it.flagged ? "Flagged for review" : "Flag for review") + '</button>' +
+        (run.pos < run.items.length - 1 ? '<button class="btn" id="next">Next</button>' : '<button class="btn" id="submit2">Review and submit</button>');
+    } else if (revealed) {
+      html += '<span></span><button class="btn" id="next">' + (run.pos < run.items.length - 1 ? "Next question" : "See my results") + '</button>';
+    }
+    html += '</div>';
+    if (test) {
+      html += '<div class="navgrid" aria-label="Jump to a question">' + run.items.map(function (x, i) {
+        return '<button data-jump="' + i + '" class="' + (x.chosen !== null ? "done " : "") + (i === run.pos ? "cur " : "") + (x.flagged ? "flag" : "") + '" aria-label="Question ' + (i + 1) + (x.chosen !== null ? ", answered" : ", not answered") + (x.flagged ? ", flagged" : "") + '">' + (i + 1) + '</button>';
+      }).join("") + '</div><p class="keyhint">Keyboard: A to D to choose, F to flag, left and right arrows to move.</p>';
+    } else {
+      html += '<p class="keyhint">Keyboard: A to D to answer, Enter for the next question.</p>';
+    }
+    html += '</div>';
+    app.innerHTML = html;
+
+    app.querySelectorAll("button.opt").forEach(function (b) { b.addEventListener("click", function () { choose(+b.getAttribute("data-orig")); }); });
+    var e;
+    if ((e = document.getElementById("next"))) e.addEventListener("click", next);
+    if ((e = document.getElementById("prev"))) e.addEventListener("click", prev);
+    if ((e = document.getElementById("flag"))) e.addEventListener("click", toggleFlag);
+    if ((e = document.getElementById("submit2"))) e.addEventListener("click", askSubmit);
+    if ((e = document.getElementById("hideT"))) e.addEventListener("click", function () { run.timerHidden = !run.timerHidden; saveRun(); if (run.timerHidden) document.getElementById("timer").textContent = "Timer hidden"; this.textContent = run.timerHidden ? "Show timer" : "Hide timer"; tickTimer(); });
+    document.getElementById("endBtn").addEventListener("click", test ? askSubmit : askEndPractice);
+    app.querySelectorAll("[data-jump]").forEach(function (b) { b.addEventListener("click", function () { run.pos = +b.getAttribute("data-jump"); saveRun(); renderQuiz(); }); });
+    if (run.deadline) { if (run.timerHidden) document.getElementById("timer").textContent = "Timer hidden"; tickTimer(); stopTimer(); timerHandle = setInterval(tickTimer, 1000); }
+    if (revealed && document.getElementById("next")) document.getElementById("next").focus();
+  }
+
+  function feedbackHtml(q, it) {
+    var right = it.chosen === q.answer;
+    var keyLetter = LETTERS[it.order.indexOf(q.answer)];
+    return '<div class="feedback' + (right ? " good" : "") + '"><p class="verdict">' + (right ? "Correct." : "Not quite. The correct answer is " + keyLetter + ".") + '</p><p>' + esc(q.rationale) + '</p></div>';
+  }
+
+  function choose(orig) {
+    var it = run.items[run.pos], q = BY_ID[it.id];
+    if (run.mode === "test") {
+      it.chosen = it.chosen === orig ? null : orig;
+      saveRun(); renderQuiz();
+      var pressed = app.querySelector('button.opt[data-orig="' + orig + '"]'); if (pressed) pressed.focus();
+      return;
+    }
+    if (it.chosen !== null) return;
+    it.chosen = orig;
+    recordAnswer(it.id, orig === q.answer); saveStore(); saveRun();
+    renderQuiz();
+    announce(orig === q.answer ? "Correct." : "Not quite. The correct answer is " + LETTERS[it.order.indexOf(q.answer)] + ".");
+  }
+  function next() {
+    if (run.pos < run.items.length - 1) { run.pos++; saveRun(); renderQuiz(); window.scrollTo(0, 0); }
+    else if (run.mode === "practice") { finishRun(false); go("results"); }
+  }
+  function prev() { if (run.pos > 0) { run.pos--; saveRun(); renderQuiz(); window.scrollTo(0, 0); } }
+  function toggleFlag() { var it = run.items[run.pos]; it.flagged = !it.flagged; saveRun(); renderQuiz(); }
+
+  function askSubmit() {
+    var un = run.items.filter(function (x) { return x.chosen === null; }).length, fl = run.items.filter(function (x) { return x.flagged; }).length;
+    var body = (un ? "<b>" + un + " question" + (un > 1 ? "s are" : " is") + " unanswered</b> and will count as incorrect. " : "You have answered every question. ") +
+      (fl ? fl + " question" + (fl > 1 ? "s are" : " is") + " still flagged for review. " : "") + "Once you submit, you cannot change your answers.";
+    confirmBox("Submit your set?", body, "Submit", function () { finishRun(false); go("results"); }, "Keep working");
+  }
+  function askEndPractice() {
+    var n = run.items.filter(function (x) { return x.chosen !== null; }).length;
+    if (!n) { confirmBox("End this set?", "You have not answered any questions yet, so there are no results to show.", "End set", function () { run = null; saveRun(); go("home"); }); return; }
+    confirmBox("End this set now?", "Your results will include the " + n + " question" + (n > 1 ? "s" : "") + " you answered.", "End and see results", function () { finishRun(true); go("results"); });
+  }
+
+  function finishRun(early) {
+    if (run.finished) return;
+    stopTimer();
+    run.finished = true; run.endedEarly = early; run.finishedAt = Date.now();
+    if (run.mode === "test") {
+      run.items.forEach(function (it) {
+        var q = BY_ID[it.id];
+        if (it.chosen === null) recordSeen(it.id); else recordAnswer(it.id, it.chosen === q.answer);
+      });
+    }
+    var counted = run.items.filter(function (it) { return run.mode === "test" || it.chosen !== null; });
+    var correct = counted.filter(function (it) { return it.chosen === BY_ID[it.id].answer; }).length;
+    var secs = {}; counted.forEach(function (it) { secs[BY_ID[it.id].section] = 1; });
+    store.history.unshift({ t: run.finishedAt, mode: run.mode, kind: run.kind, n: counted.length, c: correct, secs: Object.keys(secs), dur: Math.round((run.finishedAt - run.startedAt) / 1000) });
+    if (run.kind === "diagnostic") {
+      var ds = diagnosticSummary(run);
+      store.lastDiag = { t: run.finishedAt, c: correct, n: counted.length, units: ds.units, rec: ds.rec, missed: ds.missed };
+    }
+    store.history = store.history.slice(0, 200);
+    saveStore();
+    localStorage && storageOK && localStorage.removeItem(CONFIG.runKey);
+    reviewFilter = "all";
+  }
+
+  document.addEventListener("keydown", function (e) {
+    if (view !== "quiz" || !run || run.finished || document.querySelector(".modal-back")) return;
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    var tag = (e.target.tagName || "").toLowerCase(); if (tag === "input" || tag === "select" || tag === "textarea") return;
+    var it = run.items[run.pos], key = e.key.toUpperCase(), i = LETTERS.indexOf(key);
+    if (i > -1) { if (run.mode === "practice" && it.chosen !== null) return; e.preventDefault(); choose(it.order[i]); return; }
+    if (run.mode === "test") {
+      if (key === "F") { e.preventDefault(); toggleFlag(); }
+      else if (e.key === "ArrowRight") { e.preventDefault(); if (run.pos < run.items.length - 1) next(); }
+      else if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
+    } else if (e.key === "Enter" && it.chosen !== null && e.target.id !== "next") { e.preventDefault(); next(); }
+  });
+
+  /* ---------- Results ---------- */
+  function renderResults() {
+    if (!run || !run.finished) { go("home"); return; }
+    var test = run.mode === "test";
+    var counted = run.items.filter(function (it) { return test || it.chosen !== null; });
+    var correct = counted.filter(function (it) { return it.chosen === BY_ID[it.id].answer; }).length;
+    var p = pct(correct, counted.length), dur = Math.round((run.finishedAt - run.startedAt) / 1000);
+    var msg = p >= 80 ? "Strong work. These topics are in good shape." : p >= 60 ? "Good progress. Read the explanations for the ones you missed, then try them again." : "Keep going. Review your notes on the topics below, then retry the questions you missed.";
+    var bySec = {};
+    counted.forEach(function (it) { var q = BY_ID[it.id], b = bySec[q.section] || (bySec[q.section] = { n: 0, c: 0 }); b.n++; if (it.chosen === q.answer) b.c++; });
+    var missed = counted.filter(function (it) { return it.chosen !== BY_ID[it.id].answer; });
+
+    var diag = run.kind === "diagnostic";
+    var html = '<h2>' + (diag ? "Diagnostic" : run.kind === "retry" ? "Retry" : test ? "Test" : "Practice") + ' results</h2>' +
+      (run.endedEarly ? '<p class="lead">You ended this set early, so these results cover the ' + counted.length + ' questions you answered.</p>' : '') +
+      '<div class="card accent"><div class="bigscore">' + correct + ' / ' + counted.length + ' <span style="font-size:.55em">(' + p + '%)</span></div><p style="margin:6px 0 0">' + msg + '</p>' +
+      '<div class="stats"><div class="stat"><b>' + correct + '</b><span>correct</span></div><div class="stat"><b>' + (counted.length - correct) + '</b><span>' + (test ? "incorrect or blank" : "incorrect") + '</span></div>' +
+      '<div class="stat"><b>' + fmtTime(dur) + '</b><span>time taken</span></div><div class="stat"><b>' + (counted.length ? Math.round(dur / counted.length) : 0) + 's</b><span>per question (exam pace 72s)</span></div></div>' +
+      '<div class="row">' + (missed.length ? '<button class="btn" id="retry">Retry the ' + missed.length + ' I missed</button>' : '') +
+      (run.settings ? '<button class="btn alt" id="again">Prepare another set with the same ingredients</button>' : '') +
+      (diag ? '' : '<button class="btn alt" data-go="build">Change ingredients</button>') +
+      '<button class="btn alt" id="predict">Estimate my AP grade</button>' +
+      (CONFIG.resultsFormUrl ? '<button class="btn alt" id="send">Send my results to my teacher</button>' : '') + '</div></div>';
+
+    if (diag) html += diagnosticCard(diagnosticSummary(run));
+
+    html += '<div class="card"><h3>By topic</h3><div class="tablewrap"><table class="data"><thead><tr><th>Topic</th><th>Score</th><th class="hide-sm" style="width:30%">This set</th></tr></thead><tbody>' +
+      Object.keys(bySec).sort(function (a, b) { var x = a.split("."), y = b.split("."); return (x[0] - y[0]) || (x[1] - y[1]); }).map(function (s) {
+        var b = bySec[s], pp = pct(b.c, b.n);
+        return '<tr><td><b>' + s + '</b> ' + esc(topicName(s)) + '</td><td>' + b.c + '/' + b.n + '</td><td class="hide-sm"><div class="mini"><div style="width:' + pp + '%;background:' + (pp < 60 ? "#a3242f" : pp < 80 ? "#C55A11" : "#1e7b34") + '"></div></div></td></tr>';
+      }).join("") + '</tbody></table></div></div>';
+
+    html += '<div class="card"><h3>Review every question</h3><div class="filters" role="group" aria-label="Filter the review">' +
+      [["all", "All"], ["wrong", test ? "Incorrect or blank" : "Incorrect"]].concat(test ? [["flag", "Flagged"]] : []).map(function (f) {
+        return '<button class="btn small alt" data-f="' + f[0] + '" aria-pressed="' + (reviewFilter === f[0]) + '">' + f[1] + '</button>';
+      }).join("") + '</div><div id="reviewList"></div></div>';
+    app.innerHTML = html;
+
+    function drawReview() {
+      var list = counted.map(function (it, i) { return { it: it, n: run.items.indexOf(it) + 1 }; }).filter(function (x) {
+        var q = BY_ID[x.it.id];
+        if (reviewFilter === "wrong") return x.it.chosen !== q.answer;
+        if (reviewFilter === "flag") return x.it.flagged;
+        return true;
+      });
+      document.getElementById("reviewList").innerHTML = list.length ? list.map(function (x) {
+        var it = x.it, q = BY_ID[it.id], ok = it.chosen === q.answer, blank = it.chosen === null;
+        return '<div class="review ' + (ok ? "" : blank ? "u" : "x") + '"><div class="row" style="justify-content:space-between"><b>Question ' + x.n + (blank ? " (left blank)" : ok ? " (correct)" : " (incorrect)") + '</b><span class="tag">' + esc(q.section + " " + topicName(q.section)) + '</span></div>' +
+          (q.stimulus ? '<figure class="stim" style="margin-top:8px">' + renderStimulus(q.stimulus) + '</figure>' : '') +
+          '<p style="font-weight:bold;margin:8px 0 4px">' + esc(q.stem) + '</p><ol>' + it.order.map(function (orig, i) {
+            var cls = orig === q.answer ? "k" : orig === it.chosen ? "yx" : "";
+            var note = orig === q.answer ? (orig === it.chosen ? " (your answer, correct)" : " (correct answer)") : orig === it.chosen ? " (your answer)" : "";
+            return '<li class="' + cls + '">' + LETTERS[i] + '. ' + esc(q.options[orig]) + '<span class="small">' + note + '</span></li>';
+          }).join("") + '</ol><div class="rat"><b>Why:</b> ' + esc(q.rationale) + '</div></div>';
+      }).join("") : '<p class="muted">Nothing to show for this filter.</p>';
+    }
+    drawReview();
+    app.querySelectorAll("[data-f]").forEach(function (b) {
+      b.addEventListener("click", function () { reviewFilter = b.getAttribute("data-f"); app.querySelectorAll("[data-f]").forEach(function (x) { x.setAttribute("aria-pressed", x === b); }); drawReview(); });
+    });
+    var r = document.getElementById("retry");
+    if (r) r.addEventListener("click", function () {
+      var qs = shuffle(missed.map(function (it) { return BY_ID[it.id]; }));
+      run = newRun(qs, { mode: "practice", kind: "retry", title: "Retry missed questions", settings: run.settings }); saveRun(); go("quiz");
+    });
+    var a = document.getElementById("again");
+    if (a) a.addEventListener("click", function () { var st = run.settings; settings = Object.assign({}, settings, st); startFromSettings(st); });
+    var pr = document.getElementById("predict");
+    if (pr) pr.addEventListener("click", function () { go("predictor", { mcqMax: counted.length, mcq: correct }); });
+    var sd = document.getElementById("send");
+    if (sd) sd.addEventListener("click", function () { sendResults(run); });
+    app.querySelectorAll("[data-practice]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        settings.source = "fresh"; settings.mode = "practice";
+        go("build", { sections: b.getAttribute("data-practice").split(",") });
+      });
+    });
+  }
+
+  function diagnosticCard(ds) {
+    var all = 0, allC = 0;
+    Object.keys(ds.units).forEach(function (u) { all += ds.units[u].n; allC += ds.units[u].c; });
+    var everyGood = ds.order.every(function (u) { return ds.units[u].c / (ds.units[u].n || 1) >= 0.8; });
+    var recSecs = [];
+    var h = '<div class="card accent"><h3>Where to start for May</h3>';
+    h += '<p style="margin-top:0">' + (everyGood
+      ? "You did well across the board. Start with Unit " + ds.rec[0] + ", your lowest score, and use mixed test sets to keep every unit fresh."
+      : "Start with " + ds.rec.map(function (u) { return "<b>Unit " + u + ": " + esc(UNITS[u]) + "</b>"; }).join(", then ") + ".") + '</p>';
+    ds.rec.forEach(function (u) {
+      var missed = (ds.missed[u] || []).filter(function (s, i, arr) { return arr.indexOf(s) === i; }).sort(function (a, b) { return a.split('.')[1] - b.split('.')[1]; });
+      var weakHist = SECTIONS.filter(function (s) { var st = sectionStats(s), r = rated(st); return unitOf(s) === u && r != null && r < 60 && missed.indexOf(s) < 0; });
+      var secs = missed.concat(weakHist);
+      if (!secs.length) secs = SECTIONS.filter(function (s) { return unitOf(s) === u; });
+      recSecs = recSecs.concat(secs);
+      h += '<div class="notice info" style="margin-bottom:10px"><b>Unit ' + u + ': ' + esc(UNITS[u]) + '</b> (' + ds.units[u].c + ' of ' + ds.units[u].n + ' correct)<br>' +
+        (missed.length ? 'Topics you missed: ' + missed.map(function (s) { return s + " " + esc(topicName(s)); }).join("; ") + '.' : 'You missed no single topic here, so practice the whole unit.') +
+        (weakHist.length ? '<br>Also weak in your earlier practice: ' + weakHist.map(function (s) { return s + " " + esc(topicName(s)); }).join("; ") + '.' : '') +
+        '<div style="margin-top:8px"><button class="btn small" data-practice="' + secs.join(",") + '">Practice ' + (missed.length || weakHist.length ? "these topics" : "Unit " + u) + '</button></div></div>';
+    });
+    h += '<div class="tablewrap"><table class="data"><thead><tr><th>Unit</th><th>Score</th><th class="hide-sm" style="width:28%"></th><th>Status</th></tr></thead><tbody>' +
+      ds.order.map(function (u) {
+        var c = ds.units[u].c, n = ds.units[u].n, p = pct(c, n), inRec = ds.rec.indexOf(u) > -1;
+        var label = inRec ? "Start here" : p >= 80 ? "In good shape" : p <= 60 ? "Next up" : "Review soon";
+        var cls = inRec ? "lo" : p >= 80 ? "hi" : "mid";
+        return '<tr><td><b>Unit ' + u + '</b> ' + esc(UNITS[u]) + '</td><td>' + c + '/' + n + '</td><td class="hide-sm"><div class="mini"><div style="width:' + p + '%;background:' + (p < 60 ? "#a3242f" : p < 80 ? "#C55A11" : "#1e7b34") + '"></div></div></td><td><span class="acc ' + cls + '">' + label + '</span></td></tr>';
+      }).join("") + '</tbody></table></div>' +
+      '<p class="small muted">Five questions per unit is a quick check, not a final verdict. Your ratings in My progress get more accurate the more you practice.</p>' +
+      '<div class="row"><button class="btn" data-practice="' + recSecs.filter(function (s, i, a) { return a.indexOf(s) === i; }).join(",") + '">Build a set from all my recommendations</button><button class="btn alt" data-go="progress">See my progress</button></div></div>';
+    return h;
+  }
+
+  /* ---------- Send results to the teacher (Google Form pre-filled link) ---------- */
+  function resultsPayload(r) {
+    var test = r.mode === "test";
+    var counted = r.items.filter(function (it) { return test || it.chosen !== null; });
+    var correct = counted.filter(function (it) { return it.chosen === BY_ID[it.id].answer; }).length;
+    var type = r.kind === "diagnostic" ? "Diagnostic" : r.kind === "retry" ? "Retry of missed questions" : test ? "Test set" + (r.deadline ? " (timed)" : " (untimed)") : "Practice set";
+    var topics, next;
+    if (r.kind === "diagnostic") {
+      var ds = diagnosticSummary(r);
+      topics = Object.keys(ds.units).map(function (u) { return "Unit " + u + " " + ds.units[u].c + "/" + ds.units[u].n; }).join("; ");
+      next = "Start with " + ds.rec.map(function (u) { return "Unit " + u; }).join(", ") + ". Missed topics: " +
+        (Object.keys(ds.missed).sort().map(function (u) { return ds.missed[u].join(", "); }).join(", ") || "none");
+    } else {
+      var by = {};
+      counted.forEach(function (it) { var q = BY_ID[it.id], b = by[q.section] || (by[q.section] = { c: 0, n: 0 }); b.n++; if (it.chosen === q.answer) b.c++; });
+      var keys = Object.keys(by).sort(function (a, b) { var x = a.split("."), y = b.split("."); return (x[0] - y[0]) || (x[1] - y[1]); });
+      topics = keys.map(function (s) { return s + " " + by[s].c + "/" + by[s].n; }).join("; ");
+      var weak = keys.filter(function (s) { return by[s].c / by[s].n < 0.6; });
+      next = weak.length ? "Below 60%: " + weak.join(", ") : "No topic below 60%";
+    }
+    var d = new Date(r.finishedAt || Date.now());
+    var when = d.toLocaleString(undefined, { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) +
+      " (took " + fmtTime(((r.finishedAt || Date.now()) - r.startedAt) / 1000) + (r.endedEarly ? ", ended early" : "") + ")";
+    return { TYPE: type, SCORE: correct + "/" + counted.length + " (" + pct(correct, counted.length) + "%)", TOPICS: topics, NEXT: next, WHEN: when };
+  }
+  function buildFormUrl(base, values) {
+    var u = new URL(base), changed = 0;
+    u.searchParams.forEach(function (v, k) {
+      if (/^entry\./.test(k) && values.hasOwnProperty(v.trim().toUpperCase())) { u.searchParams.set(k, values[v.trim().toUpperCase()]); changed++; }
+    });
+    return changed ? u.toString() : null;
+  }
+  function sendResults(r) {
+    var prof = store.profile || {};
+    var back = document.createElement("div");
+    back.className = "modal-back";
+    back.innerHTML = '<div class="modal" role="dialog" aria-modal="true" aria-labelledby="st"><h3 id="st">Send your results to your teacher</h3>' +
+      '<p class="small">This opens a Google Form with your results already filled in. Type your school email at the top of the form, check that everything else is right, then press <b>Submit</b>. Nothing is sent until you do.</p>' +
+      '<label class="small"><b>Your name (Last, First)</b><br><input id="sname" placeholder="e.g. Khan, Sara" style="font:inherit;width:100%;padding:8px;margin:4px 0 10px;border:1px solid #9db3c9;border-radius:6px" value="' + esc(prof.name || "") + '"></label>' +
+      '<label class="small"><b>Your class or block</b><br><input id="sclass" placeholder="e.g. Mercado-B" style="font:inherit;width:100%;padding:8px;margin:4px 0 12px;border:1px solid #9db3c9;border-radius:6px" value="' + esc(prof.cls || "") + '"></label>' +
+      '<p id="serr" class="small" style="color:#a3242f;margin:0 0 8px"></p>' +
+      '<div class="row" style="justify-content:flex-end"><button class="btn alt" data-m="no">Cancel</button><button class="btn" data-m="go">Open the form</button></div></div>';
+    document.body.appendChild(back);
+    var name = back.querySelector("#sname"); name.focus();
+    function close() { back.remove(); }
+    back.addEventListener("keydown", function (e) { if (e.key === "Escape") close(); });
+    back.addEventListener("click", function (e) {
+      var m = e.target.getAttribute("data-m");
+      if (e.target === back || m === "no") return close();
+      if (m !== "go") return;
+      var n = name.value.trim(), c = back.querySelector("#sclass").value.trim();
+      if (!n) { back.querySelector("#serr").textContent = "Please type your name so your teacher knows whose results these are."; return; }
+      store.profile = { name: n, cls: c }; saveStore();
+      var vals = resultsPayload(r); vals.NAME = n; vals.CLASS = c;
+      var url = null;
+      try { url = buildFormUrl(CONFIG.resultsFormUrl, vals); } catch (err) { }
+      if (!url) { back.querySelector("#serr").textContent = "The results form is not set up correctly. Please tell your teacher."; return; }
+      window.open(url, "_blank", "noopener");
+      close(); announce("The results form opened in a new tab.");
+    });
+  }
+
+  /* ---------- Progress ---------- */
+  function renderProgress() {
+    var ids = Object.keys(store.items).filter(function (id) { return BY_ID[id]; });
+    var seen = ids.filter(function (id) { var r = store.items[id]; return r.a || r.s; }).length;
+    var att = 0, cor = 0; ids.forEach(function (id) { att += store.items[id].a; cor += store.items[id].c; });
+    var sets = store.history.length, weak = weakestSections(3);
+
+    var html = '<h2>My progress</h2><p class="lead">Saved in this browser on this device. ' + (store.created ? "Tracking since " + fmtDate(store.created) + "." : "") + '</p>';
+    if (!storageOK) html += '<div class="notice"><b>Progress cannot be saved in this browser mode</b> (often a private or incognito window).</div>';
+    html += '<div class="card accent"><div class="stats"><div class="stat"><b>' + seen + '</b><span>of ' + BANK.length + ' questions seen</span></div><div class="stat"><b>' + (att ? pct(cor, att) + "%" : "-") + '</b><span>overall accuracy</span></div>' +
+      '<div class="stat"><b>' + att + '</b><span>answers given</span></div><div class="stat"><b>' + sets + '</b><span>sets completed</span></div></div>' +
+      (weak.length ? '<p style="margin:4px 0 10px"><b>Your weakest topics right now:</b> ' + weak.map(function (s) { return s + " " + esc(topicName(s)) + " (" + sectionStats(s).acc + "%)"; }).join("; ") + '</p><button class="btn" id="weakBtn">Practice my weakest topics</button>'
+        : '<p class="muted" style="margin:4px 0 0">Answer at least ' + CONFIG.minAttemptsForRating + ' questions in a topic to get a rating for it.</p>') + '</div>';
+
+    html += '<div class="card"><h3>By unit and topic</h3><p class="small muted" style="margin-top:0">Ratings: below 60% needs work, 60 to 79% getting there, 80% and above strong. A topic needs at least ' + CONFIG.minAttemptsForRating + ' answers before it gets a rating.</p>';
+    var units = {}; SECTIONS.forEach(function (s) { (units[unitOf(s)] = units[unitOf(s)] || []).push(s); });
+    Object.keys(units).sort().forEach(function (u) {
+      var ua = 0, uc = 0, us = 0, ut = 0;
+      units[u].forEach(function (s) { var st = sectionStats(s); ua += st.attempts; uc += st.correct; us += st.seen; ut += st.total; });
+      var uacc = ua ? pct(uc, ua) : null;
+      html += '<details class="unit"><summary><span><span class="unit-title">Unit ' + u + ': ' + esc(UNITS[u]) + '</span> <span class="count">' + us + '/' + ut + ' seen</span> <span class="acc ' + accClass(ua >= CONFIG.minAttemptsForRating ? uacc : null) + '">' + (ua ? uacc + "% correct" : "Not started") + '</span></span><span class="chev hide-sm"></span></summary>' +
+        '<div class="tablewrap" style="padding:0 12px 12px"><table class="data"><thead><tr><th>Topic</th><th>Seen</th><th>Accuracy</th><th>Status</th></tr></thead><tbody>' +
+        units[u].map(function (s) {
+          var st = sectionStats(s), a = rated(st);
+          var status = !st.attempts ? "Not started" : a == null ? "Too few answers yet" : a < 60 ? "Needs work" : a < 80 ? "Getting there" : "Strong";
+          return '<tr><td><b>' + s + '</b> ' + esc(topicName(s)) + '</td><td>' + st.seen + '/' + st.total + '</td><td>' + (st.attempts ? st.acc + "% (" + st.correct + "/" + st.attempts + ")" : "-") + '</td><td><span class="acc ' + accClass(a) + '">' + status + '</span></td></tr>';
+        }).join("") + '</tbody></table></div></details>';
+    });
+    html += '</div>';
+
+    html += '<div class="card"><h3>Recent sets</h3>' + (store.history.length ? '<div class="tablewrap"><table class="data"><thead><tr><th>Date</th><th>Type</th><th>Score</th><th class="hide-sm">Topics</th></tr></thead><tbody>' +
+      store.history.slice(0, 15).map(function (h) {
+        return '<tr><td>' + fmtDate(h.t) + '</td><td>' + (h.kind === "retry" ? "Retry" : h.mode === "test" ? "Test" : "Practice") + '</td><td>' + h.c + '/' + h.n + ' (' + pct(h.c, h.n) + '%)</td><td class="hide-sm small">' + esc(h.secs.slice(0, 6).join(", ") + (h.secs.length > 6 ? " and more" : "")) + '</td></tr>';
+      }).join("") + '</tbody></table></div>' : '<p class="muted">No sets completed yet.</p>') + '</div>';
+
+    html += '<div class="card"><h3>Back up or move your progress</h3><p style="margin-top:0">Download a backup file now and then (once a week is a good habit). To move to a new device or browser, download a backup here, then open this site on the new device and restore it.</p>' +
+      '<div class="row"><button class="btn" id="dl">Download a backup</button><label class="btn alt" style="cursor:pointer">Restore from a backup<input type="file" id="up" accept=".json,application/json" class="sr"></label><button class="btn warn" id="reset">Erase my progress</button></div><p id="bkmsg" class="small" style="margin-bottom:0"></p></div>';
+    app.innerHTML = html;
+
+    var w = document.getElementById("weakBtn");
+    if (w) w.addEventListener("click", function () { settings.source = "fresh"; go("build", { sections: weak }); });
+    document.getElementById("dl").addEventListener("click", function () {
+      var blob = new Blob([JSON.stringify({ app: "ap-psych-practice-bank", exported: Date.now(), store: store })], { type: "application/json" });
+      var a = document.createElement("a"), d = new Date();
+      a.href = URL.createObjectURL(blob);
+      a.download = "ap-psych-progress-" + d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2) + ".json";
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(a.href); }, 1000);
+      document.getElementById("bkmsg").textContent = "Backup downloaded. Keep the file somewhere safe, such as your school Google Drive.";
+    });
+    document.getElementById("up").addEventListener("change", function (e) {
+      var f = e.target.files[0]; if (!f) return;
+      var rd = new FileReader();
+      rd.onload = function () {
+        try {
+          var data = JSON.parse(rd.result), s = data.store;
+          if (!s || s.v !== 1 || !s.items) throw new Error("bad");
+          confirmBox("Restore this backup?", "This replaces the progress currently saved in this browser with the backup from " + fmtDate(data.exported) + " (" + Object.keys(s.items).length + " questions). This cannot be undone.", "Restore", function () {
+            store = s; store.history = store.history || []; saveStore(); go("progress"); announce("Backup restored.");
+          });
+        } catch (err) { document.getElementById("bkmsg").textContent = "That file is not a backup from this site."; }
+        e.target.value = "";
+      };
+      rd.readAsText(f);
+    });
+    document.getElementById("reset").addEventListener("click", function () {
+      confirmBox("Erase all of your progress?", "This deletes every answer, rating and set history saved in this browser. Download a backup first if you might want it back.", "Erase everything", function () {
+        store = blankStore(); saveStore(); run = null; saveRun(); go("progress");
+      });
+    });
+  }
+
+  /* ---------- AP Grade Predictor (same calculation as the teacher's summative grade calculator) ---------- */
+  var PRED = (function () {
+    var MCQ_POINTS = 66.6, FRQ_POINTS = 33.4;
+    // Composite (0 to 100) to DAA number: [minimum composite, DAA number]
+    var DAA = [[99, 100], [96, 99], [93, 98], [91, 97], [88, 96], [85, 95], [82, 94], [80, 93]];
+    for (var j = 79; j >= 56; j--) DAA.push([j, j + 13]);
+    DAA.push([55, 68], [53, 67], [51, 66], [49, 65], [47, 64], [45, 63], [43, 62], [41, 61], [40, 60]);
+    for (j = 39; j >= 1; j--) DAA.push([j, j + 20]);
+    DAA.push([0, 0]);
+    var LETTERS_ = [[97, "A+", "97 to 100"], [93, "A", "93 to 96"], [90, "A-", "90 to 92"], [87, "B+", "87 to 89"], [83, "B", "83 to 86"], [80, "B-", "80 to 82"],
+      [77, "C+", "77 to 79"], [73, "C", "73 to 76"], [70, "C-", "70 to 72"], [67, "D+", "67 to 69"], [65, "D", "65 to 66"], [60, "D-", "60 to 64"], [0, "F", "59 and below"]];
+    var AP_ROWS = [[5, "A+ to A"], [4, "A- to B"], [3, "B- to C"], [2, "C- to D-"], [1, "F"]];
+    function daaFrom(c) { for (var i = 0; i < DAA.length; i++) if (c >= DAA[i][0]) return DAA[i][1]; return 0; }
+    function letterFrom(d) { for (var i = 0; i < LETTERS_.length; i++) if (d >= LETTERS_[i][0]) return LETTERS_[i][1]; return "F"; }
+    function apFrom(l) {
+      if (l === "A+" || l === "A") return 5;
+      if (l === "A-" || l === "B+" || l === "B") return 4;
+      if (l === "B-" || l === "C+" || l === "C") return 3;
+      if (l === "C-" || l === "D+" || l === "D" || l === "D-") return 2;
+      return 1;
+    }
+    function compute(mcq, mcqMax, frq, frqMax) {
+      var raw = (mcq / mcqMax) * MCQ_POINTS + (frq / frqMax) * FRQ_POINTS;
+      var composite = Math.round(raw * 100) / 100;
+      if (mcq === mcqMax && frq === frqMax) composite = 100;
+      var key = Math.min(100, Math.round(raw));       // rounded before the DAA lookup, as in the gradebook
+      var daa = daaFrom(key), letter = letterFrom(daa);
+      return { composite: composite, daa: daa, letter: letter, ap: apFrom(letter) };
+    }
+    return { compute: compute, DAA: DAA, LETTERS: LETTERS_, AP_ROWS: AP_ROWS };
+  })();
+  window.PracticeApp_PRED = PRED;
+
+  function renderPredictor(opts) {
+    var saved = store.predictor || { mcqMax: 15, frqMax: 7, mcq: 10, frq: 5 };
+    var st = Object.assign({}, saved);
+    var fromSet = opts && opts.mcqMax;
+    if (fromSet) { st.mcqMax = Math.min(100, opts.mcqMax); st.mcq = Math.min(opts.mcq, st.mcqMax); }
+    var rowId = function (l) { return l.replace("+", "plus").replace("-", "minus"); };
+
+    app.innerHTML = '<h2>AP Grade Predictor</h2><p class="lead">First set the number of MCQ questions and FRQ points on your summative. Then move the sliders to estimate your AP&reg; Psychology score and your DAA grade.</p>' +
+      (fromSet ? '<div class="notice info">Your MCQ score from the set you just finished (' + opts.mcq + ' out of ' + opts.mcqMax + ') has been filled in. Add your FRQ points to complete the estimate.</div>' : '') +
+      '<div class="pgrid"><div>' +
+      '<div class="card accent"><h3>Summative setup</h3><p class="small muted" style="margin-top:0">Enter the totals listed on your summative.</p><div class="setup">' +
+      '<label>MCQ total (questions)<input type="number" id="mcqMax" min="1" max="100" value="' + st.mcqMax + '"></label>' +
+      '<label>FRQ total (points)<input type="number" id="frqMax" min="1" max="100" value="' + st.frqMax + '"></label></div>' +
+      '<p class="small muted" style="margin-bottom:0">The composite is weighted about 2/3 MCQ (66.6%) and 1/3 FRQ (33.4%), whatever the totals above.</p></div>' +
+      '<div class="card"><div class="numrow"><div><h3 style="margin:0">Multiple choice</h3><span class="small muted" id="mcqLabel"></span></div><input type="number" id="mcqNum" min="0" aria-label="Multiple choice score"></div>' +
+      '<input type="range" id="mcqRange" min="0" aria-label="Multiple choice score slider"><div class="ticks" aria-hidden="true"><span>0</span><span id="mcqMid"></span><span id="mcqTop"></span></div></div>' +
+      '<div class="card"><div class="numrow"><div><h3 style="margin:0">Free response</h3><span class="small muted" id="frqLabel"></span></div><input type="number" id="frqNum" min="0" aria-label="Free response score"></div>' +
+      '<input type="range" id="frqRange" min="0" aria-label="Free response score slider"><div class="ticks" aria-hidden="true"><span>0</span><span id="frqTop"></span></div></div>' +
+      '<p class="small muted">This is an estimate based on the course gradebook boundaries. Your actual grade is set by your teacher, and your AP score is set by the College Board.</p>' +
+      '</div><div class="card sticky"><h3 style="text-align:center">Your estimated score</h3>' +
+      '<div class="apcircle" id="apCircle" aria-live="polite"></div><p class="small muted" style="text-align:center;margin:0;font-weight:bold;letter-spacing:.04em">PREDICTED AP SCORE</p>' +
+      '<div class="trio"><div><span>Composite</span><b id="compOut"></b><span id="rawOut" style="text-transform:none;font-weight:normal"></span></div><div><span>DAA number</span><b id="daaOut"></b></div><div><span>Letter grade</span><b id="letterOut"></b></div></div>' +
+      '<h3 style="font-size:15px">AP score and letter grade range</h3><div class="bandlist" id="apList">' +
+      PRED.AP_ROWS.map(function (r) { return '<div id="ap-' + r[0] + '"><b>' + r[0] + '</b><span>' + r[1] + '</span></div>'; }).join("") + '</div>' +
+      '<h3 style="font-size:15px;margin-top:14px">Letter grade boundaries (by DAA number)</h3><div class="bandlist" id="letList">' +
+      PRED.LETTERS.map(function (r) { return '<div id="let-' + rowId(r[1]) + '"><b>' + r[1] + '</b><span>' + r[2] + '</span></div>'; }).join("") + '</div>' +
+      '<h3 style="font-size:15px;margin-top:14px">DAA number boundaries</h3><p class="small muted" style="margin-top:0">Minimum composite (out of 100) for each DAA number.</p><div class="daatab" id="daaTab"><div class="head"><span>DAA number</span><span>Composite at least</span></div>' +
+      PRED.DAA.map(function (r) { return '<div id="daa-' + r[1] + '"><span><b>' + r[1] + '</b></span><span>' + r[0] + '</span></div>'; }).join("") + '</div>' +
+      '</div></div>';
+
+    var $ = function (id) { return document.getElementById(id); };
+    var clamp = function (v, lo, hi) { return Math.min(hi, Math.max(lo, v)); };
+    function readMax(el, fb) { var v = parseInt(el.value, 10); return (isNaN(v) || v < 1) ? fb : Math.min(v, 100); }
+    var last = {};
+    function hl(prefix, val) {
+      if (last[prefix] !== undefined) { var o = $(prefix + last[prefix]); if (o) o.classList.remove("hl"); }
+      var n = $(prefix + val); if (n) n.classList.add("hl");
+      last[prefix] = val;
+    }
+    function calc() {
+      var mMax = readMax($("mcqMax"), 15), fMax = readMax($("frqMax"), 7);
+      var m = clamp(parseInt($("mcqRange").value, 10) || 0, 0, mMax), f = clamp(parseInt($("frqRange").value, 10) || 0, 0, fMax);
+      var r = PRED.compute(m, mMax, f, fMax);
+      $("compOut").textContent = Number.isInteger(r.composite) ? r.composite : r.composite.toFixed(1);
+      $("rawOut").textContent = (m + f) + " / " + (mMax + fMax) + " pts";
+      $("daaOut").textContent = r.daa; $("letterOut").textContent = r.letter;
+      var c = $("apCircle"); c.textContent = r.ap; c.className = "apcircle ap" + r.ap;
+      hl("ap-", r.ap); hl("let-", rowId(r.letter)); hl("daa-", r.daa);
+      var d = $("daa-" + r.daa), tab = $("daaTab");
+      if (d && tab) tab.scrollTop = d.offsetTop - tab.offsetTop - tab.clientHeight / 2;
+      store.predictor = { mcqMax: mMax, frqMax: fMax, mcq: m, frq: f }; saveStore();
+    }
+    function applyMaxes() {
+      var mMax = readMax($("mcqMax"), 15), fMax = readMax($("frqMax"), 7);
+      ["mcqRange", "mcqNum"].forEach(function (id) { $(id).max = mMax; });
+      ["frqRange", "frqNum"].forEach(function (id) { $(id).max = fMax; });
+      $("mcqRange").value = clamp(parseInt($("mcqRange").value, 10) || 0, 0, mMax); $("mcqNum").value = $("mcqRange").value;
+      $("frqRange").value = clamp(parseInt($("frqRange").value, 10) || 0, 0, fMax); $("frqNum").value = $("frqRange").value;
+      $("mcqLabel").textContent = mMax + " question" + (mMax === 1 ? "" : "s");
+      $("frqLabel").textContent = fMax + " point" + (fMax === 1 ? "" : "s");
+      $("mcqTop").textContent = mMax; $("mcqMid").textContent = Math.round(mMax / 2); $("frqTop").textContent = fMax;
+      calc();
+    }
+    function numInput(numEl, rangeEl, maxFn) {
+      numEl.addEventListener("input", function () {
+        var v = parseInt(numEl.value, 10); rangeEl.value = clamp(isNaN(v) ? 0 : v, 0, maxFn()); calc();
+      });
+      numEl.addEventListener("blur", function () { var v = parseInt(numEl.value, 10); numEl.value = clamp(isNaN(v) ? 0 : v, 0, maxFn()); });
+      rangeEl.addEventListener("input", function () { numEl.value = rangeEl.value; calc(); });
+    }
+    $("mcqRange").max = 100; $("frqRange").max = 100;
+    $("mcqRange").value = st.mcq; $("frqRange").value = st.frq;
+    ["mcqMax", "frqMax"].forEach(function (id) {
+      $(id).addEventListener("input", applyMaxes);
+      $(id).addEventListener("blur", function () { $(id).value = readMax($(id), id === "mcqMax" ? 15 : 7); applyMaxes(); });
+    });
+    numInput($("mcqNum"), $("mcqRange"), function () { return readMax($("mcqMax"), 15); });
+    numInput($("frqNum"), $("frqRange"), function () { return readMax($("frqMax"), 7); });
+    applyMaxes();
+  }
+
+  /* ---------- Help: how progress is saved ---------- */
+  function renderHelp() {
+    app.innerHTML = '<h2>How your progress is saved</h2><p class="lead">There are no accounts on this site. Your progress is saved automatically, right after every answer, in the browser you are using.</p>' +
+      '<div class="card accent help"><h3 style="margin-top:0">What the site remembers</h3><ul>' +
+      '<li>Every question you have answered, whether you got it right, and when.</li>' +
+      '<li>Your accuracy for each unit and topic, which feeds your ratings and the "My weakest topics" button.</li>' +
+      '<li>Your recent sets and your last choice of ingredients.</li>' +
+      '<li>An unfinished set, so you can resume it from the home page.</li>' +
+      '<li>Which questions you have already seen. This is how every new set is different from the last one.</li></ul>' +
+      '<p>Your progress is stored only on your device. It is not sent to your teacher or anyone else.</p></div>' +
+      '<div class="card help"><h3 style="margin-top:0">To keep your progress</h3><ul class="do">' +
+      '<li>Use the same device and the same browser every time.</li>' +
+      '<li>Open the site from the same link. Bookmark it.</li>' +
+      '<li>Download a backup from My progress about once a week, and keep it in your school Google Drive.</li>' +
+      '<li>Visit at least once a week if you use Safari on an iPhone, iPad or Mac. Safari can delete saved site data after 7 days without a visit.</li></ul>' +
+      '<h3>Do NOT do these, or your progress can disappear</h3><ul class="dont">' +
+      '<li>Do not clear your browsing history, cookies or site data.</li>' +
+      '<li>Do not use a private or incognito window. Nothing is kept after you close it.</li>' +
+      '<li>Do not switch to another browser or device without restoring a backup there. Each browser keeps its own separate progress.</li>' +
+      '<li>Do not open a downloaded copy of this page from your computer instead of the website link. It counts as a different site.</li>' +
+      '<li>Do not use a shared or lab computer that resets itself. Other students on it could also see or erase your progress.</li>' +
+      '<li>Do not press "Erase my progress" unless you really mean it.</li></ul>' +
+      '<h3>Moving to a new device</h3><ol><li>On your old device, go to My progress and press <b>Download a backup</b>.</li><li>Send the file to yourself (for example, save it to Google Drive).</li><li>On the new device, open this site, go to My progress and press <b>Restore from a backup</b>.</li></ol>' +
+      '<div class="row" style="margin-top:12px"><button class="btn" data-go="progress">Go to My progress</button><button class="btn alt" data-go="build">Build a set</button></div></div>';
+  }
+
+  /* ---------- Test hooks (used by automated checks) ---------- */
+  window.PracticeApp = { prepareSet: prepareSet, newRun: newRun, getRun: function () { return run; }, getStore: function () { return store; }, bankSize: BANK.length, sections: SECTIONS };
+
+  /* ---------- Start ---------- */
+  if (!BANK.length) { app.innerHTML = '<div class="notice"><b>The question bank did not load.</b> Make sure practice-bank.js is in the same folder as this page.</div>'; return; }
+  var il = document.getElementById("indexLink");
+  if (CONFIG.indexUrl) il.setAttribute("href", CONFIG.indexUrl); else il.remove();
+  var start = { "#predictor": "predictor", "#diagnostic": "diag", "#build": "build", "#progress": "progress", "#help": "help" }[location.hash];
+  go(start || "home", { keepFocus: true });
+})();
+</script>
+</body>
+</html>
